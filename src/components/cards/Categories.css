@@ -1,0 +1,6 @@
+.parent{
+    background-size: 80%;
+}
+.parent:hover{
+    background-size: 200%;
+}
