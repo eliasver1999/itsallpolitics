@@ -6,14 +6,19 @@ import { TiTick } from "react-icons/ti";
 import { Categories } from "../components/cards/Categories";
 import Article from "../components/cards/Article";
 import Footer from "../components/footer/Footer";
+import { useSelector } from "react-redux";
+import { state } from "../types/initial";
+import { blogType } from "../types/blog";
+import PhoneNavbar from "../components/navbar/PhoneNavbar";
 type Props = {};
 
 const Home = (props: Props) => {
+  const { blogs } = useSelector((state: state) => state);
   return (
     <>
-      <Navbar />
+      <PhoneNavbar />
       <div>
-        <div className=" -mt-48 mx-auto block">
+        <div className=" lg:-mt-48 -mt-12 mx-auto block">
           <img src="./assets/hero.jpg" alt="hero" className="mx-auto block" />
           <div className=" gap-1 mt-12 md:px-64">
             <div className="h-full">
@@ -70,67 +75,31 @@ const Home = (props: Props) => {
         </div>
         <div className=" mb-32">
           <h3 className="text-3xl font-semibold md:px-64">Τελευταία άρθρα</h3>
-          <div className="grid grid-cols-3 justify-center items-center  gap-16 px-12 mt-12">
-            <div>
-              <Article
-                id={1}
-                image="art1.jpg"
-                title="Πίσω από αθώες ψυχές"
-                date="29 Δεκεμβρίου, 2022"
-                category="ΚΟΙΝΩΝΙΑ"
-                description="Ποιος ορισμός μπορεί να αποδώσει καλύτερα την έννοια της παιδικής πορνογραφίας; Ποια λέξη, ποια δήλωση, ποια ποινή όσο σκληρή, όσο"
-              />
-            </div>
-            <div>
-              <Article
-                id={2}
-                image="art1.jpg"
-                title="Πίσω από αθώες ψυχές"
-                date="29 Δεκεμβρίου, 2022"
-                category="ΚΟΙΝΩΝΙΑ"
-                description="Ποιος ορισμός μπορεί να αποδώσει καλύτερα την έννοια της παιδικής πορνογραφίας; Ποια λέξη, ποια δήλωση, ποια ποινή όσο σκληρή, όσο"
-              />
-            </div>
-            <div>
-              <Article
-                id={1}
-                image="art1.jpg"
-                title="Πίσω από αθώες ψυχές"
-                date="29 Δεκεμβρίου, 2022"
-                category="ΚΟΙΝΩΝΙΑ"
-                description="Ποιος ορισμός μπορεί να αποδώσει καλύτερα την έννοια της παιδικής πορνογραφίας; Ποια λέξη, ποια δήλωση, ποια ποινή όσο σκληρή, όσο"
-              />
-            </div>
-            <div>
-              <Article
-                id={1}
-                image="art1.jpg"
-                title="Πίσω από αθώες ψυχές"
-                date="29 Δεκεμβρίου, 2022"
-                category="ΚΟΙΝΩΝΙΑ"
-                description="Ποιος ορισμός μπορεί να αποδώσει καλύτερα την έννοια της παιδικής πορνογραφίας; Ποια λέξη, ποια δήλωση, ποια ποινή όσο σκληρή, όσο"
-              />
-            </div>
-            <div>
-              <Article
-                id={1}
-                image="art1.jpg"
-                title="Πίσω από αθώες ψυχές"
-                date="29 Δεκεμβρίου, 2022"
-                category="ΚΟΙΝΩΝΙΑ"
-                description="Ποιος ορισμός μπορεί να αποδώσει καλύτερα την έννοια της παιδικής πορνογραφίας; Ποια λέξη, ποια δήλωση, ποια ποινή όσο σκληρή, όσο"
-              />
-            </div>
-            <div>
-              <Article
-                id={1}
-                image="art1.jpg"
-                title="Πίσω από αθώες ψυχές"
-                date="29 Δεκεμβρίου, 2022"
-                category="ΚΟΙΝΩΝΙΑ"
-                description="Ποιος ορισμός μπορεί να αποδώσει καλύτερα την έννοια της παιδικής πορνογραφίας; Ποια λέξη, ποια δήλωση, ποια ποινή όσο σκληρή, όσο"
-              />
-            </div>
+          <div
+            className={`${
+              blogs.length > 0 ? "grid grid-cols-3" : ""
+            } justify-center items-center  gap-16 px-12 mt-12`}
+          >
+            {blogs.length > 0 ? (
+              blogs.map((blog: blogType) => {
+                return (
+                  <div>
+                    <Article
+                      id={blog.id}
+                      image={blog.image.path}
+                      title={blog.title}
+                      date={blog.created_at}
+                      category={blog.category.title}
+                      description={blog.body}
+                    />
+                  </div>
+                );
+              })
+            ) : (
+              <h3 className="text-xl font-semibold md:px-64 w-full">
+                No articles Found
+              </h3>
+            )}
           </div>
         </div>
       </div>

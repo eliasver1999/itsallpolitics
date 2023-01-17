@@ -1,0 +1,16 @@
+.hamburger--top {
+  height: 1px;
+  width: 24px;
+  background-color: black;
+  z-index: 40;
+}
+.hamburger--middle {
+  height: 1.7px;
+  width: 24px;
+  background-color: black;
+}
+.hamburger--bottom {
+  height: 2px;
+  width: 24px;
+  background-color: black;
+}
