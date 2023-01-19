@@ -19,18 +19,18 @@ const Article = ({ image, date, category, title, description, id }: Props) => {
   });
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col  border-2 border-gray-200 p-2 rounded-md ">
+    <div className="flex flex-col  border-2 border-gray-200 p-2 rounded-md min-h-[611px] max-h-[611px]">
       <div
         style={{
           backgroundSize: "cover",
         }}
-        className=" h-[330px] w-full hover:bg-gradient-to-r from-indigo-500 transition-all duration-500 cursor-pointer"
+        className=" w-full hover:bg-gradient-to-r from-indigo-500 transition-all duration-500 cursor-pointer"
       >
         <img
           src={ApiKind.IMAGE + image}
           alt={image}
-          className="hover:opacity-40 h-full w-full transition-all duration-500"
-          onClick={() => navigate(`/category/politics/article/${id}`)}
+          className="hover:opacity-40 w-full transition-all duration-500 min-h-[360px] max-h-[360px]"
+          onClick={() => navigate(`/category/${category}/article/${id}`)}
         />
       </div>
       <div className="flex flex-col justify-end items-start mx-3 gap-8 mt-4">
@@ -61,7 +61,18 @@ const Article = ({ image, date, category, title, description, id }: Props) => {
             {cleanHTML?.length > 200 && (
               <button
                 className="underline"
-                onClick={() => navigate(`/article/${id}`, { state: {} })}
+                onClick={() =>
+                  navigate(`/category/${category}/article/${id}`, {
+                    state: {
+                      image: image,
+                      title: title,
+                      date: date,
+                      category: category,
+                      description: description,
+                      id,
+                    },
+                  })
+                }
               >
                 Read More
               </button>

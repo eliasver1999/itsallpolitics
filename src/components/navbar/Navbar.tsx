@@ -21,7 +21,7 @@ const Navbar = (props: Props) => {
           ΑΡΧΙΚΗ
         </NavLink>
         <NavLink
-          to="/category/politics"
+          to="/category/ΠΟΛΙΤΙΚΗ"
           className={({ isActive }) =>
             `${
               isActive ? "underlined" : "hover-underline-animation"
@@ -31,7 +31,7 @@ const Navbar = (props: Props) => {
           ΠΟΛΙΤΙΚΗ
         </NavLink>
         <NavLink
-          to="/2"
+          to="/category/ΔΙΕΘΝΗ"
           className={({ isActive }) =>
             `${
               isActive ? "underlined" : "hover-underline-animation"
@@ -41,7 +41,7 @@ const Navbar = (props: Props) => {
           ΔΙΕΘΝΗ
         </NavLink>
         <NavLink
-          to="/3"
+          to="/category/ΟΙΚΟΝΟΜΙΑ"
           className={({ isActive }) =>
             `${
               isActive ? "underlined" : "hover-underline-animation"
@@ -51,7 +51,7 @@ const Navbar = (props: Props) => {
           ΟΙΚΟΝΟΜΙΑ
         </NavLink>
         <NavLink
-          to="/4"
+          to="/category/ΚΟΙΝΩΝΙΑ"
           className={({ isActive }) =>
             `${
               isActive ? "underlined" : "hover-underline-animation"

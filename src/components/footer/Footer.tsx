@@ -5,9 +5,9 @@ type Props = {};
 
 const Footer = (props: Props) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col  bottom-0">
       <div className=" bg-zinc-800 py-4">
-        <div className="grid grid-cols-4 items-start justify-between px-24 gap-4">
+        <div className="grid lg:grid-cols-4 items-start justify-between px-24 gap-4">
           <div className=" mt-4">
             <h3 className="text-center text-2xl mt-2 text-gray-200 mb-4">
               ΣΧΕΤΙΚΑ ΜΕ ΕΜΑΣ

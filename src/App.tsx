@@ -25,8 +25,32 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/category/politics" element={<Politics />} />
-      <Route path="/category/politics/article/*">
+
+      <Route path="/category/*">
+        <Route path=":category" element={<Politics />}>
+          <Route index element={<Politics />} />
+          <Route path=":groupId" element={<Politics />} />
+        </Route>
+      </Route>
+      <Route path="/category/ΔΙΕΘΝΗ/article/*">
+        <Route path=":id" element={<SingleArticle />}>
+          <Route index element={<SingleArticle />} />
+          <Route path=":groupId" element={<SingleArticle />} />
+        </Route>
+      </Route>
+      <Route path="/category/ΚΟΙΝΩΝΙΑ/article/*">
+        <Route path=":id" element={<SingleArticle />}>
+          <Route index element={<SingleArticle />} />
+          <Route path=":groupId" element={<SingleArticle />} />
+        </Route>
+      </Route>
+      <Route path="/category/ΠΟΛΙΤΙΚΗ/article/*">
+        <Route path=":id" element={<SingleArticle />}>
+          <Route index element={<SingleArticle />} />
+          <Route path=":groupId" element={<SingleArticle />} />
+        </Route>
+      </Route>
+      <Route path="/category/ΟΙΚΟΝΟΜΙΑ/article/*">
         <Route path=":id" element={<SingleArticle />}>
           <Route index element={<SingleArticle />} />
           <Route path=":groupId" element={<SingleArticle />} />

@@ -7,7 +7,7 @@ type CategoryProps = {
 
 export const Categories = ({ title, image }: CategoryProps) => {
   return (
-    <div className="h-[543px] overflow-hidden z-0">
+    <div className="lg:h-[543px] h-[350px] overflow-hidden z-0">
       <div
         className="h-full flex justify-center text-white align-middle text-center items-center parent transition-all hover:scale-125 duration-1000 cursor-pointer"
         style={{

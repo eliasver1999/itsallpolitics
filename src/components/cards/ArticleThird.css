@@ -1,0 +1,13 @@
+.box {
+  display: inline-block;
+
+  aspect-ratio: 1;
+  background-color: #e3c47bee;
+  transition: 0.35s;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+}
+
+.one {
+  --mask: radial-gradient(30px at 50% 10px, #0000 97%, #000) 0% -20px/ 50px;
+}

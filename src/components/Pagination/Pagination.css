@@ -1,0 +1,27 @@
+.navigation {
+  display: inline-block;
+}
+
+.pagination a {
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+.previous {
+  color: white;
+  border-radius: 50px;
+  border: 1px solid #a47ade;
+  background-color: #a47ade;
+}
+.selected {
+  color: #8d05fc;
+}
+li {
+  color: gray;
+}
+.next {
+  color: white;
+  border-radius: 50px;
+  border: 1px solid #a47ade;
+  background-color: #a47ade;
+}

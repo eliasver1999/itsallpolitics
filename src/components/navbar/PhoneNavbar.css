@@ -14,3 +14,7 @@
   width: 24px;
   background-color: black;
 }
+
+.nav {
+  -webkit-backface-visibility: hidden;
+}
