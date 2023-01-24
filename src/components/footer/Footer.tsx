@@ -1,6 +1,6 @@
 import React from "react";
 import { BsTelephone } from "react-icons/bs";
-import { AiOutlineMail } from "react-icons/ai";
+import { AiOutlineMail, AiOutlineInstagram } from "react-icons/ai";
 type Props = {};
 
 const Footer = (props: Props) => {
@@ -105,12 +105,25 @@ const Footer = (props: Props) => {
             </h3>
             <ul className="text-gray-200 list-none text-center space-y-4">
               <li>
-                <BsTelephone className="inline-block mr-4" />
-                <h4 className="inline-block">2104511835</h4>
+                <AiOutlineInstagram
+                  className="inline-block mr-4"
+                  size={22}
+                  color="#9544cf"
+                />
+                <a
+                  className="inline-block"
+                  href="https://www.instagram.com/itsallpolitics.gr/"
+                >
+                  itsallpolitics.gr
+                </a>
               </li>
               <li>
-                <AiOutlineMail className="inline-block mr-4" />
-                <h4 className="inline-block">eliasver99@gmail.com</h4>
+                <AiOutlineMail
+                  className="inline-block mr-4"
+                  size={22}
+                  color="#9544cf"
+                />
+                <h4 className="inline-block">itsallpolitics2023@gmail.com</h4>
               </li>
             </ul>
           </div>
