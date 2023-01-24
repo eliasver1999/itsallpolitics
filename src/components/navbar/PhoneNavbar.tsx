@@ -36,17 +36,19 @@ const PhoneNavbar = (props: Props) => {
           onClick={() => setIsOpen(!isOpen)}
         >
           <motion.div
-            className="hamburger--top z-40"
+            className="hamburger--top z-40 "
+            style={{ backgroundColor: "rgba(149, 68, 207,.9)" }}
             animate={{
               opacity: isOpen ? 0 : 1,
             }}
           ></motion.div>
           <motion.div
-            className="hamburger--middle"
+            className="hamburger--middle "
+            style={{ backgroundColor: "rgba(149, 68, 207,.9)" }}
             animate={{
               rotate: isOpen ? 140 : 0,
               y: isOpen ? 6 : 0,
-              height: isOpen ? 2 : 1,
+              height: isOpen ? 2 : 2,
             }}
             transition={{
               delay: 0.05,
@@ -55,10 +57,11 @@ const PhoneNavbar = (props: Props) => {
             }}
           ></motion.div>
           <motion.div
-            className="hamburger--bottom"
+            className="hamburger--bottom "
+            style={{ backgroundColor: "rgba(149, 68, 207,.9)" }}
             animate={{
               rotate: isOpen ? 40 : 0,
-              height: isOpen ? 2 : 1,
+              height: isOpen ? 2 : 2,
             }}
             transition={{
               delay: 0.05,

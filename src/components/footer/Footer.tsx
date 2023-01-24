@@ -13,28 +13,50 @@ const Footer = (props: Props) => {
               ΣΧΕΤΙΚΑ ΜΕ ΕΜΑΣ
             </h3>
             <p className="text-gray-200 text-justify">
-              Στόχος του WHAT POLITICS MEANS είναι να δώσει την ευκαιρία σε
-              προπτυχιακούς φοιτητές όλων των τμημάτων Πολιτικής Επιστήμης και
-              Διεθνών Σχέσεων να αρθρογραφήσουν, να σχολιάσουν και να ερευνήσουν
-              σε θέματα που άπτονται το ακαδημαϊκό αντικείμενο των σχολών τους.
+              Το It's All Politics είναι ένα νεοσύστατο site που δημιουργήθηκε
+              από φοιτητές του τμήματος Πολιτικής Επιστήμης & Ιστορίας του
+              Παντείου Πανεπιστημίου. Κύριο μέλημα ειναι να παρουσιάζονται με
+              κατανοητό τρόπο θέματα πολιτικά και κοινωνικοοικονομικά και να
+              προωθηθεί το αίσθημα του διαλόγου στα φλέγοντα ζητήματα της
+              επικαιρότητας.
             </p>
           </div>
           <div className="mt-4">
             <h2 className="text-center text-2xl mt-2 text-gray-200 mb-4">
               ΜENOY
             </h2>
-            <ul className="text-gray-200 list-disc text-center space-y-4">
+            <ul className="text-gray-200 list-disc text-center space-y-4 ">
               <li>
-                <a href="/">ARXIKH</a>
+                <a
+                  href="/"
+                  className="hover:text-[#9544cf]/80 transition-all duration-300"
+                >
+                  ΑΡΧΙΚΗ
+                </a>
               </li>
               <li>
-                <a href="/">Σχετικά με εμάς</a>
+                <a
+                  href="/"
+                  className="hover:text-[#9544cf]/80 transition-all duration-300"
+                >
+                  Σχετικά με εμάς
+                </a>
               </li>
               <li>
-                <a href="/">Επικοινωνία</a>
+                <a
+                  href="/"
+                  className="hover:text-[#9544cf]/80 transition-all duration-300"
+                >
+                  Επικοινωνία
+                </a>
               </li>
               <li>
-                <a href="/">Όροι Χρήσης</a>
+                <a
+                  href="/"
+                  className="hover:text-[#9544cf]/80 transition-all duration-300"
+                >
+                  Όροι Χρήσης
+                </a>
               </li>
             </ul>
           </div>
@@ -44,16 +66,36 @@ const Footer = (props: Props) => {
             </h2>
             <ul className="text-gray-200 list-disc text-center space-y-4">
               <li>
-                <a href="/">ΔΙΕΘΝΗ</a>
+                <a
+                  href="/"
+                  className="hover:text-[#9544cf]/80 transition-all duration-300"
+                >
+                  ΔΙΕΘΝΗ
+                </a>
               </li>
               <li>
-                <a href="/">ΚΟΙΝΩΝΙΑ</a>
+                <a
+                  href="/"
+                  className="hover:text-[#9544cf]/80 transition-all duration-300"
+                >
+                  ΚΟΙΝΩΝΙΑ
+                </a>
               </li>
               <li>
-                <a href="/">ΟΙΚΟΝΟΜΙΑ</a>
+                <a
+                  href="/"
+                  className="hover:text-[#9544cf]/80 transition-all duration-300"
+                >
+                  ΟΙΚΟΝΟΜΙΑ
+                </a>
               </li>
               <li>
-                <a href="/">ΠΟΛΙΤΙΚΗ</a>
+                <a
+                  href="/"
+                  className="hover:text-[#9544cf]/80 transition-all duration-300"
+                >
+                  ΠΟΛΙΤΙΚΗ
+                </a>
               </li>
             </ul>
           </div>

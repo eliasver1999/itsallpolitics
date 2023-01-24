@@ -12,6 +12,9 @@ import Social from "../components/social/Social";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import ArticleSecond from "../components/cards/ArticleSecond";
+import ModernNav from "../components/navbar/ModernNav";
+import SimpleNav from "../components/navbar/SimpleNav";
+import PhoneNavbar from "../components/navbar/PhoneNavbar";
 
 type Props = {};
 
@@ -28,10 +31,19 @@ const SingleArticle = (props: Props) => {
 
   return (
     <>
-      <Navbar />
-      <div className="mt-4 h-full 2xl:px-80 px-32 grid grid-cols-3 mb-32 gap-12">
-        <div className="col-span-2">
-          <h3 className="text-xl font-semibold tracking-wide">{blog.title}</h3>
+      <div className="xl:hidden block">
+        <PhoneNavbar />
+      </div>
+      <div className="xl:block hidden">
+        {/* <Navbar /> */}
+        <SimpleNav />
+        <ModernNav />
+      </div>
+      <div className="mt-4 h-full 2xl:px-80 lg:px-32 px-4 lg:grid lg:grid-cols-3 mb-32 gap-12 ">
+        <div className="lg:col-span-2">
+          <h3 className="text-xl font-semibold tracking-wide mt-32">
+            {blog.title}
+          </h3>
           <h4 className="text-lg  tracking-wide">
             Κατηγορία: {blog.category.title}
           </h4>
@@ -43,8 +55,17 @@ const SingleArticle = (props: Props) => {
           />
 
           <p
-            className="text-justify text-[#3f3f3f] tracking-wide mt-4"
-            style={{ fontSize: "16px" }}
+            className=" text-[#3f3f3f] tracking-wide mt-4 lg:block hidden"
+            style={{ textIndent: "50px" }}
+          >
+            <p
+              dangerouslySetInnerHTML={{ __html: cleanHTML }}
+              className="my-4"
+            ></p>
+          </p>
+          <p
+            className=" text-[#3f3f3f] tracking-wide mt-4 lg:hidden block"
+            style={{ textIndent: "25px" }}
           >
             <p
               dangerouslySetInnerHTML={{ __html: cleanHTML }}
@@ -96,24 +117,44 @@ const SingleArticle = (props: Props) => {
             </div>
           </div>
         </div>
-        <div className="col-span-3 space-y-4">
+        <div className="lg:col-span-3 space-y-4 mt-4">
           <h4 className="text-xl font-thin">Παρόμοια Άρθρα</h4>
-          <Swiper
-            spaceBetween={50}
-            slidesPerView={3}
-            navigation
-            pagination={{ clickable: true }}
-            onSlideChange={() => console.log("slide change")}
-            onSwiper={(swiper) => console.log(swiper)}
-          >
-            {blogs.map((blog: blogType) => {
-              return (
-                <SwiperSlide>
-                  <ArticleSecond blog={blog} small={true} />
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
+          <div className="lg:hidden block">
+            <Swiper
+              spaceBetween={50}
+              slidesPerView={1}
+              navigation
+              pagination={{ clickable: true }}
+              onSlideChange={() => console.log("slide change")}
+              onSwiper={(swiper) => console.log(swiper)}
+            >
+              {blogs.map((blog: blogType) => {
+                return (
+                  <SwiperSlide>
+                    <ArticleSecond blog={blog} small={true} />
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          </div>
+          <div className="lg:block hidden">
+            <Swiper
+              spaceBetween={50}
+              slidesPerView={3}
+              navigation
+              pagination={{ clickable: true }}
+              onSlideChange={() => console.log("slide change")}
+              onSwiper={(swiper) => console.log(swiper)}
+            >
+              {blogs.map((blog: blogType) => {
+                return (
+                  <SwiperSlide>
+                    <ArticleSecond blog={blog} small={true} />
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          </div>
         </div>
       </div>
       <Footer />

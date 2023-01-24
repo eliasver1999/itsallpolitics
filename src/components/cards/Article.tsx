@@ -38,10 +38,7 @@ const Article = ({ image, date, category, title, description, id }: Props) => {
           <h4 className="text-xl">{title}</h4>
         </div>
         <div className="flex flex-col gap-1">
-          <div className="text-sm">
-            {formatDate(dateFormat)} |{" "}
-            <span className="cursor-pointer">{category}</span>
-          </div>
+          <div className="text-sm">{formatDate(dateFormat)} | </div>
           <div>
             {cleanHTML?.length > 200 ? (
               <div>

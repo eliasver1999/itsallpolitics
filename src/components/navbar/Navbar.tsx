@@ -5,7 +5,7 @@ type Props = {};
 
 const Navbar = (props: Props) => {
   return (
-    <div className="grid grid-cols-4 px-32 sticky top-0 bg-white z-10">
+    <div className="grid grid-cols-4 px-32 sticky top-0 bg-gray-50 z-10">
       <div className=" py-4">
         <img src="/assets/logo.png" alt="logo" width={132} height={128} />
       </div>

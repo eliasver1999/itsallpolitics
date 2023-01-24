@@ -1,18 +1,18 @@
 .hamburger--top {
-  height: 1px;
-  width: 24px;
-  background-color: black;
+  height: 2px;
+  width: 22px;
+  background-color: rgb(236, 236, 236);
   z-index: 40;
 }
 .hamburger--middle {
-  height: 1.7px;
-  width: 24px;
-  background-color: black;
+  height: 2px;
+  width: 22px;
+  background-color: rgb(236, 236, 236);
 }
 .hamburger--bottom {
   height: 2px;
-  width: 24px;
-  background-color: black;
+  width: 22px;
+  background-color: rgb(236, 236, 236);
 }
 
 .nav {

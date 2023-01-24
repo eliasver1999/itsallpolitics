@@ -2,6 +2,7 @@ import DOMPurify from "dompurify";
 import { ClientRequest } from "http";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { formatDate } from "../../helpers/date";
 import { ApiKind } from "../../types/api";
 import { blogType } from "../../types/blog";
 
@@ -25,11 +26,16 @@ const ArticleSecond = ({ blog, small }: Props) => {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}
-      className="h-[500px] rounded-xl flex justify-start items-end text-white relative"
+      className="h-[500px] rounded-xl flex justify-start items-end text-white relative w-full"
     >
-      <div className="flex-row px-12  space-y-2  absolute bottom-12">
+      <div className="flex-row lg:px-12 px-0  space-y-2  absolute bottom-12">
         <div>
-          <h3 className="font-semibold tracking-widest">{blog.title}</h3>
+          <h3 className="font-semibold tracking-widest px-4">{blog.title}</h3>
+        </div>
+        <div>
+          <h3 className="font-thin tracking-widest px-4">
+            {formatDate(new Date(blog.created_at))}|{blog.category.title}
+          </h3>
         </div>
         {small ? (
           ""
@@ -41,7 +47,7 @@ const ArticleSecond = ({ blog, small }: Props) => {
                   dangerouslySetInnerHTML={{
                     __html: cleanHTML?.substring(0, 250).concat("..."),
                   }}
-                  className="my-4 inline-block text-ellipsis"
+                  className="my-4 inline-block text-ellipsis pl-2"
                 ></p>
               </div>
             ) : (
@@ -58,7 +64,8 @@ const ArticleSecond = ({ blog, small }: Props) => {
       ) : (
         <div className="w-full relative bottom-0 right-0 text-end  ">
           <button
-            className="bg-indigo-600 py-1 px-2 rounded-tl-lg rounded-br-lg"
+            className=" py-1 px-2 rounded-tl-lg rounded-br-lg"
+            style={{ backgroundColor: "rgba(149, 68, 207,.8)" }}
             onClick={() =>
               navigate(`/category/${blog.category.title}/article/${blog.id}`, {
                 state: {
