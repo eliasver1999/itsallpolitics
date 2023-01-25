@@ -19,6 +19,7 @@ import ModernNav from "../components/navbar/ModernNav";
 import SimpleNav from "../components/navbar/SimpleNav";
 import { motion } from "framer-motion";
 import Article from "../components/cards/Article";
+import Contact from "../components/Contact/Contact";
 type Props = {};
 
 const Home = (props: Props) => {
@@ -98,29 +99,7 @@ const Home = (props: Props) => {
         </div>
       </section>
       <section className="flex flex-col justify-center mb-12">
-        <div className="justify-center flex flex-col items-center text-center  w-screen">
-          <div className="bg-[#737373]/90 w-1/3 space-y-2 rounded-lg">
-            <div>
-              <h4 className="text-xl text-slate-100">ΕΠΙΚΟΙΝΩΝΙΑ</h4>
-            </div>
-            <div>
-              <p className=" text-slate-100">
-                Contact us for a quote,help or join the team
-              </p>
-            </div>
-            <div className="flex flex-row justify-between items-center px-48">
-              <div>
-                <AiOutlineMail size={32} color="#8400d1" />
-              </div>
-              <div>
-                <AiOutlineFacebook size={32} color="#8400d1" />
-              </div>
-              <div>
-                <AiOutlineInstagram size={32} color="#8400d1" />
-              </div>
-            </div>
-          </div>
-        </div>
+        <Contact />
       </section>
       <section>
         <Footer />

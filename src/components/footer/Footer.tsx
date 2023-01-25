@@ -7,7 +7,7 @@ const Footer = (props: Props) => {
   return (
     <div className="flex flex-col  bottom-0">
       <div className=" bg-zinc-800 py-4">
-        <div className="grid lg:grid-cols-4 items-start justify-between px-24 gap-4">
+        <div className="grid lg:grid-cols-4 items-start justify-between lg:px-24  px-12 gap-4">
           <div className=" mt-4">
             <h3 className="text-center text-2xl mt-2 text-gray-200 mb-4">
               ΣΧΕΤΙΚΑ ΜΕ ΕΜΑΣ
@@ -48,14 +48,6 @@ const Footer = (props: Props) => {
                   className="hover:text-[#9544cf]/80 transition-all duration-300"
                 >
                   Επικοινωνία
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/"
-                  className="hover:text-[#9544cf]/80 transition-all duration-300"
-                >
-                  Όροι Χρήσης
                 </a>
               </li>
             </ul>

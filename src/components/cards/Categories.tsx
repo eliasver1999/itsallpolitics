@@ -22,7 +22,7 @@ export const Categories = ({ title, image, up }: CategoryProps) => {
         animate={{ opacity: 1, y: 0 }}
         whileHover={{
           scale: 1.2,
-          transition: { duration: 0.3 },
+          transition: { duration: 0.1 },
         }}
         transition={{ type: "linear", duration: 0.4 }}
       ></motion.div>
