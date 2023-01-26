@@ -78,7 +78,7 @@ const SingleArticle = (props: Props) => {
           </p>
           <h4 className="mt-4 font-semibold text-lg">
             Συντάκτης:{" "}
-            {blog.creator.map((cr: creator, index: any) => (
+            {blog?.creator.map((cr: creator, index: any) => (
               <span className="font-light">
                 {cr.name}
                 {index === blog.creator.length - 1 ? "" : ","}

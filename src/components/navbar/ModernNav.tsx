@@ -163,7 +163,7 @@ const ModernNav = (props: Props) => {
                       exit="exit"
                     >
                       <NavLink
-                        to={"/category/" + cat.title}
+                        to={"/category/" + cat.id}
                         onClick={() => setIsOpen(!isOpen)}
                         style={{ backgroundColor: "rgba(149, 68, 207,.3)" }}
                         className={({ isActive }) =>
@@ -194,7 +194,7 @@ const ModernNav = (props: Props) => {
                       key="eco"
                     >
                       <NavLink
-                        to={"/category/" + cat.title}
+                        to={"/category/" + cat.id}
                         onClick={() => setIsOpen(!isOpen)}
                         style={{ backgroundColor: "rgba(149, 68, 207,.3)" }}
                         className={({ isActive }) =>
@@ -224,7 +224,7 @@ const ModernNav = (props: Props) => {
                       }}
                     >
                       <NavLink
-                        to={"/category/" + cat.title}
+                        to={"/category/" + cat.id}
                         onClick={() => setIsOpen(!isOpen)}
                         style={{ backgroundColor: "rgba(149, 68, 207,.3)" }}
                         className={({ isActive }) =>
@@ -254,7 +254,7 @@ const ModernNav = (props: Props) => {
                       }}
                     >
                       <NavLink
-                        to={"/category/" + cat.title}
+                        to={"/category/" + cat.id}
                         onClick={() => setIsOpen(!isOpen)}
                         style={{ backgroundColor: "rgba(149, 68, 207,.3)" }}
                         className={({ isActive }) =>
@@ -371,7 +371,7 @@ const ModernNav = (props: Props) => {
                   {category.map((cat) => {
                     return (
                       <NavLink
-                        to={"/category/" + cat.title}
+                        to={"/category/" + cat.id}
                         onClick={() => setIsOpen(!isOpen)}
                         className={({ isActive }) =>
                           `${
@@ -385,31 +385,6 @@ const ModernNav = (props: Props) => {
                       </NavLink>
                     );
                   })}
-
-                  <NavLink
-                    to="/5"
-                    className={({ isActive }) =>
-                      `${
-                        isActive
-                          ? "underline decoration-[#9544cf]"
-                          : "hover-underline-animation"
-                      } text-[#e4e4e6] text-2xl w-1/3 text-center`
-                    }
-                  >
-                    ΣΧΕΤΙΚΑ ΜΕ ΕΜΑΣ
-                  </NavLink>
-                  <NavLink
-                    to="/6"
-                    className={({ isActive }) =>
-                      `${
-                        isActive
-                          ? "underline decoration-[#9544cf]"
-                          : "hover-underline-animation"
-                      } text-[#e4e4e6] text-2xl w-1/3 text-center`
-                    }
-                  >
-                    ΕΠΙΚΟΙΝΩΝΙΑ
-                  </NavLink>
                 </div>
               </motion.div>
             )}

@@ -66,7 +66,7 @@ const Footer = (props: Props) => {
                   <li>
                     <NavLink
                       className="hover:text-[#9544cf]/80 transition-all duration-300"
-                      to={"/category/" + cat.title}
+                      to={"/category/" + cat.id}
                     >
                       {cat.title}
                     </NavLink>

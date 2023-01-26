@@ -16,12 +16,16 @@ type Props = {};
 
 const Politics = (props: Props) => {
   const { category } = useParams();
+  console.log(category);
   const blogs: blogType[] = useSelector((state: state) => state.blogs);
   const categories = useSelector((state: state) => state.category);
   //and then
-  const cat = categories.filter((item) => item.title === category);
+  const cat: any = categories.filter(
+    (item) => item.id.toLocaleString() === category
+  );
+  console.log(cat);
   const blog: any = blogs.filter(
-    (item: blogType) => item.category.title === category
+    (item: blogType) => Number(item.category.id) === Number(category)
   );
   const myRef: any = React.useRef(null);
   const executeScroll = () => {
@@ -66,7 +70,7 @@ const Politics = (props: Props) => {
           >
             <div className="  h-full flex justify-center items-center text-center relative">
               <h3 className="bg-[#9544cf]/70 p-4 rounded-lg text-slate-50 text-2xl">
-                {category}
+                {cat[0].title}
               </h3>
               <motion.button
                 initial={{

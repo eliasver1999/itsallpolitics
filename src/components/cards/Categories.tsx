@@ -2,13 +2,16 @@ import React from "react";
 import { ApiKind } from "../../types/api";
 import "./Categories.css";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 type CategoryProps = {
   title: string;
   image: string;
   up: boolean;
+  id: number;
 };
 
-export const Categories = ({ title, image, up }: CategoryProps) => {
+export const Categories = ({ title, image, up, id }: CategoryProps) => {
+  const navigate = useNavigate();
   return (
     <div className="lg:h-[543px] h-[350px] overflow-hidden z-0 relative">
       <motion.div
@@ -30,6 +33,7 @@ export const Categories = ({ title, image, up }: CategoryProps) => {
         <span
           className=" py-2 px-6 rounded-sm cursor-pointer text-center text-slate-50"
           style={{ backgroundColor: "rgba(149, 68, 207,.8)" }}
+          onClick={() => navigate("/category/" + id)}
         >
           {title}
         </span>

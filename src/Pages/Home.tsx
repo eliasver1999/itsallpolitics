@@ -69,6 +69,7 @@ const Home = (props: Props) => {
                 title={cat.title}
                 image={cat.image.path}
                 up={i % 2 === 0}
+                id={cat.id}
               />
             </div>
           );
