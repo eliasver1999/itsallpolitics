@@ -1,5 +1,6 @@
 {
   "name": "itsallpolitics",
+  "homepage": "https://www.itsallpolitics.gr/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
