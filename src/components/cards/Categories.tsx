@@ -17,8 +17,8 @@ export const Categories = ({ title, image, up, id }: CategoryProps) => {
       <motion.div
         className="h-full flex justify-center text-white align-middle text-center items-center parent transition-all hover:scale-125 duration-1000 cursor-pointer"
         style={{
-          background: `url(${ApiKind.IMAGE + image}) top center`,
-          backgroundPosition: "center",
+          background: `url(${ApiKind.IMAGE + image})`,
+          backgroundPosition: "center center",
           backgroundSize: "cover",
         }}
         initial={{ opacity: 0.3, y: up ? 600 : -600 }}
