@@ -30,7 +30,7 @@ function App() {
           <Route index element={<Politics />} />
         </Route>
       </Route>
-      <Route path="/category/ΔΙΕΘΝΗ/article/*">
+      <Route path="/category/:id/article/*">
         <Route path=":id" element={<SingleArticle />}>
           <Route index element={<SingleArticle />} />
           <Route path=":groupId" element={<SingleArticle />} />

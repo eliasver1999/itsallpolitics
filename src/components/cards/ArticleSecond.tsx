@@ -67,7 +67,7 @@ const ArticleSecond = ({ blog, small }: Props) => {
             className=" py-1 px-2 rounded-tl-lg rounded-br-lg"
             style={{ backgroundColor: "rgba(149, 68, 207,.8)" }}
             onClick={() =>
-              navigate(`/category/${blog.category.title}/article/${blog.id}`, {
+              navigate(`/category/${blog.category.id}/article/${blog.id}`, {
                 state: {
                   image: blog.image.path,
                   title: blog.title,
