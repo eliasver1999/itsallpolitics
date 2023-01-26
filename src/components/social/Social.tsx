@@ -15,7 +15,7 @@ const Social = ({ blog }: Props) => {
         hashtag={"#itsallpolitics"}
         className="Demo__some-network__share-button"
       >
-        <FacebookIcon size={32} round /> Facebookでshare
+        <FacebookIcon size={32} round />
       </FacebookShareButton>
     </div>
   );

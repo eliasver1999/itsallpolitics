@@ -2,6 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./PhoneNavbar.css";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { state } from "../../types/initial";
 
 const variants = {
   open: { opacity: 1, x: 0 },
@@ -15,6 +17,7 @@ type Props = {};
 const PhoneNavbar = (props: Props) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   const [offset, setOffset] = React.useState<any>(null);
+  const { category } = useSelector((state: state) => state);
   const setScroll = () => {
     setOffset(window.scrollY);
   };
@@ -93,46 +96,22 @@ const PhoneNavbar = (props: Props) => {
           >
             ΑΡΧΙΚΗ
           </NavLink>
-          <NavLink
-            to="/category/politics"
-            className={({ isActive }) =>
-              `${
-                isActive ? "underlined" : "hover-underline-animation"
-              } text-[#545e6f]`
-            }
-          >
-            ΠΟΛΙΤΙΚΗ
-          </NavLink>
-          <NavLink
-            to="/2"
-            className={({ isActive }) =>
-              `${
-                isActive ? "underlined" : "hover-underline-animation"
-              } text-[#545e6f]`
-            }
-          >
-            ΔΙΕΘΝΗ
-          </NavLink>
-          <NavLink
-            to="/3"
-            className={({ isActive }) =>
-              `${
-                isActive ? "underlined" : "hover-underline-animation"
-              } text-[#545e6f]`
-            }
-          >
-            ΟΙΚΟΝΟΜΙΑ
-          </NavLink>
-          <NavLink
-            to="/4"
-            className={({ isActive }) =>
-              `${
-                isActive ? "underlined" : "hover-underline-animation"
-              } text-[#545e6f]`
-            }
-          >
-            ΚΟΙΝΩΝΙΑ
-          </NavLink>
+          {category.map((cat) => {
+            return (
+              <NavLink
+                to={"/category/" + cat.title}
+                onClick={() => setIsOpen(!isOpen)}
+                className={({ isActive }) =>
+                  `${
+                    isActive ? "underlined" : "hover-underline-animation"
+                  } text-[#545e6f]`
+                }
+              >
+                {cat.title}
+              </NavLink>
+            );
+          })}
+
           <NavLink
             to="/5"
             className={({ isActive }) =>

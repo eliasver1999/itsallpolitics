@@ -55,9 +55,7 @@ const ArticleThird = ({ blog }: Props) => {
                   ></p>
                 )}
               </div>
-              <div>
-                <h4>Συντάκτης: {blog.creator.name}</h4>
-              </div>
+              <div></div>
             </div>
           </div>
         </div>

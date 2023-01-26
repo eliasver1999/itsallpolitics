@@ -28,7 +28,6 @@ function App() {
       <Route path="/category/*">
         <Route path=":category" element={<Politics />}>
           <Route index element={<Politics />} />
-          <Route path=":groupId" element={<Politics />} />
         </Route>
       </Route>
       <Route path="/category/ΔΙΕΘΝΗ/article/*">

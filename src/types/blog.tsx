@@ -1,4 +1,4 @@
-interface creator {
+export interface creator {
   name: string;
   email: string;
 }
@@ -14,7 +14,7 @@ export interface blogType {
   title: string;
   body: string;
   creator_id: number;
-  creator: creator;
+  creator: Array<creator>;
   category: category;
   image: image;
   created_at: string;

@@ -1,7 +1,11 @@
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import "./PhoneNavbar.css";
+
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { state } from "../../types/initial";
+import { ApiKind } from "../../types/api";
 type Props = {};
 const starting = {
   hidden: {
@@ -80,7 +84,7 @@ const variantImage3 = {
 };
 const ModernNav = (props: Props) => {
   const [isOpen, setIsOpen] = React.useState(false);
-
+  const { category } = useSelector((state: state) => state);
   return (
     <div className="relative z-30 ">
       <motion.button
@@ -140,7 +144,130 @@ const ModernNav = (props: Props) => {
             exit="exit"
           >
             <motion.div className="grid grid-cols-5 col-span-2">
-              {isOpen && (
+              {category.map((cat, i) => {
+                if (i === 0 && isOpen) {
+                  return (
+                    <motion.div
+                      className="bg-red-500 col-span-3 relative flex justify-center"
+                      style={{
+                        backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.8) ),url(${
+                          ApiKind.IMAGE + cat.image.path
+                        }) `,
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",
+                      }}
+                      variants={variantImage1}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                    >
+                      <NavLink
+                        to={"/category/" + cat.title}
+                        onClick={() => setIsOpen(!isOpen)}
+                        style={{ backgroundColor: "rgba(149, 68, 207,.3)" }}
+                        className={({ isActive }) =>
+                          "text-[#e4e4e6] text-2xl bg-indigo-400 rounded-lg p-2 absolute bottom-16"
+                        }
+                      >
+                        {cat.title}
+                      </NavLink>
+                    </motion.div>
+                  );
+                }
+                if (i === 1 && isOpen) {
+                  return (
+                    <motion.div
+                      className="bg-red-100 col-span-2 relative flex justify-center"
+                      style={{
+                        backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.8) ),url(${
+                          ApiKind.IMAGE + cat.image.path
+                        }) `,
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",
+                      }}
+                      variants={variantImage2}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      key="eco"
+                    >
+                      <NavLink
+                        to={"/category/" + cat.title}
+                        onClick={() => setIsOpen(!isOpen)}
+                        style={{ backgroundColor: "rgba(149, 68, 207,.3)" }}
+                        className={({ isActive }) =>
+                          ` text-[#e4e4e6] text-2xl bg-indigo-400 rounded-lg p-2 absolute bottom-16`
+                        }
+                      >
+                        {cat.title}
+                      </NavLink>
+                    </motion.div>
+                  );
+                }
+                if (i === 2 && isOpen) {
+                  return (
+                    <motion.div
+                      className="bg-red-100 col-span-2 relative flex justify-center"
+                      variants={variantImage1}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      style={{
+                        backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.8) ),url(${
+                          ApiKind.IMAGE + cat.image.path
+                        }) `,
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",
+                      }}
+                    >
+                      <NavLink
+                        to={"/category/" + cat.title}
+                        onClick={() => setIsOpen(!isOpen)}
+                        style={{ backgroundColor: "rgba(149, 68, 207,.3)" }}
+                        className={({ isActive }) =>
+                          "text-[#e4e4e6] text-2xl bg-indigo-400 rounded-lg p-2 absolute bottom-16"
+                        }
+                      >
+                        {cat.title}
+                      </NavLink>
+                    </motion.div>
+                  );
+                }
+                if (i === 3 && isOpen) {
+                  return (
+                    <motion.div
+                      className="bg-red-800 col-span-3 relative flex justify-center"
+                      variants={variantImage3}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      style={{
+                        backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.8) ),url(${
+                          ApiKind.IMAGE + cat.image.path
+                        }) `,
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",
+                      }}
+                    >
+                      <NavLink
+                        to={"/category/" + cat.title}
+                        onClick={() => setIsOpen(!isOpen)}
+                        style={{ backgroundColor: "rgba(149, 68, 207,.3)" }}
+                        className={({ isActive }) =>
+                          "text-[#e4e4e6] text-2xl bg-indigo-400 rounded-lg p-2 absolute bottom-16"
+                        }
+                      >
+                        {cat.title}
+                      </NavLink>
+                    </motion.div>
+                  );
+                }
+              })}
+              {/* {isOpen && (
                 <motion.div
                   className="bg-red-500 col-span-3 relative flex justify-center"
                   style={{
@@ -162,33 +289,6 @@ const ModernNav = (props: Props) => {
                     }
                   >
                     ΠΟΛΙΤΙΚΗ
-                  </NavLink>
-                </motion.div>
-              )}
-
-              {isOpen && (
-                <motion.div
-                  className="bg-red-100 col-span-2 relative flex justify-center"
-                  style={{
-                    backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.8) ),url(${"/assets/economics2.jpg"}) `,
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover",
-                  }}
-                  variants={variantImage2}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  key="eco"
-                >
-                  <NavLink
-                    to="/category/OIKONOMIA"
-                    style={{ backgroundColor: "rgba(149, 68, 207,.3)" }}
-                    className={({ isActive }) =>
-                      "text-[#e4e4e6] text-2xl bg-indigo-400 rounded-lg p-2 absolute bottom-16"
-                    }
-                  >
-                    ΟΙΚΟΝΟΜΙΑ
                   </NavLink>
                 </motion.div>
               )}
@@ -243,7 +343,7 @@ const ModernNav = (props: Props) => {
                     ΚΟΙΝΩΝΙΑ
                   </NavLink>
                 </motion.div>
-              )}
+              )} */}
             </motion.div>
 
             {isOpen && (
@@ -256,60 +356,43 @@ const ModernNav = (props: Props) => {
               >
                 <div className="h-full flex flex-col justify-center space-y-12 items-center bg-neutral-900">
                   <NavLink
+                    onClick={() => setIsOpen(!isOpen)}
                     className={({ isActive }) =>
                       `${
-                        isActive ? "underlined" : "hover-underline-animation"
+                        isActive
+                          ? "underline decoration-[#9544cf]"
+                          : "hover-underline-animation"
                       } text-[#e4e4e6] text-2xl w-1/3 text-center`
                     }
                     to="/"
                   >
                     ΑΡΧΙΚΗ
                   </NavLink>
-                  <NavLink
-                    to="/category/ΠΟΛΙΤΙΚΗ"
-                    className={({ isActive }) =>
-                      `${
-                        isActive ? "underlined" : "hover-underline-animation"
-                      } text-[#e4e4e6] text-2xl w-1/3 text-center`
-                    }
-                  >
-                    ΠΟΛΙΤΙΚΗ
-                  </NavLink>
-                  <NavLink
-                    to="/category/ΔΙΕΘΝΗ"
-                    className={({ isActive }) =>
-                      `${
-                        isActive ? "underlined" : "hover-underline-animation"
-                      } text-[#e4e4e6] text-2xl w-1/3 text-center`
-                    }
-                  >
-                    ΔΙΕΘΝΗ
-                  </NavLink>
-                  <NavLink
-                    to="/category/ΟΙΚΟΝΟΜΙΑ"
-                    className={({ isActive }) =>
-                      `${
-                        isActive ? "underlined" : "hover-underline-animation"
-                      } text-[#e4e4e6] text-2xl w-1/3 text-center`
-                    }
-                  >
-                    ΟΙΚΟΝΟΜΙΑ
-                  </NavLink>
-                  <NavLink
-                    to="/category/ΚΟΙΝΩΝΙΑ"
-                    className={({ isActive }) =>
-                      `${
-                        isActive ? "underlined" : "hover-underline-animation"
-                      } text-[#e4e4e6] text-2xl w-1/3 text-center`
-                    }
-                  >
-                    ΚΟΙΝΩΝΙΑ
-                  </NavLink>
+                  {category.map((cat) => {
+                    return (
+                      <NavLink
+                        to={"/category/" + cat.title}
+                        onClick={() => setIsOpen(!isOpen)}
+                        className={({ isActive }) =>
+                          `${
+                            isActive
+                              ? "underline decoration-[#9544cf]"
+                              : "hover-underline-animation"
+                          } text-[#e4e4e6] text-2xl w-1/3 text-center`
+                        }
+                      >
+                        {cat.title}
+                      </NavLink>
+                    );
+                  })}
+
                   <NavLink
                     to="/5"
                     className={({ isActive }) =>
                       `${
-                        isActive ? "underlined" : "hover-underline-animation"
+                        isActive
+                          ? "underline decoration-[#9544cf]"
+                          : "hover-underline-animation"
                       } text-[#e4e4e6] text-2xl w-1/3 text-center`
                     }
                   >
@@ -319,7 +402,9 @@ const ModernNav = (props: Props) => {
                     to="/6"
                     className={({ isActive }) =>
                       `${
-                        isActive ? "underlined" : "hover-underline-animation"
+                        isActive
+                          ? "underline decoration-[#9544cf]"
+                          : "hover-underline-animation"
                       } text-[#e4e4e6] text-2xl w-1/3 text-center`
                     }
                   >

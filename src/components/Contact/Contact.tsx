@@ -14,6 +14,7 @@ interface IFormInput {
   lastName: string;
   subject: string;
   message: string;
+  email: string;
 }
 const Contact = (props: Props) => {
   const snackbarRef = React.useRef<any>(null);
@@ -32,7 +33,7 @@ const Contact = (props: Props) => {
     <div className="justify-center flex flex-col items-center text-center  w-screen">
       <div className="bg-[#9544cf]/90 lg:w-1/3 lg:px-0 w-screen  rounded-lg py-12">
         <div>
-          <h4 className="text-xl text-slate-100">ΕΠΙΚΟΙΝΩΝΙΑ</h4>
+          <h4 className="text-xl text-slate-100 font-semibold">ΕΠΙΚΟΙΝΩΝΙΑ</h4>
         </div>
 
         <div className="flex flex-col lg:justify-between justify-start items-start px-16 lg:px-48 mt-6">
@@ -56,24 +57,62 @@ const Contact = (props: Props) => {
             </a>
           </div>
         </div>
-        <div className="mt-4">
+        <div className="mt-2">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="space-y-4  px-8 py-12 rounded-lg"
+            className="space-y-4  lg:px-16 px-8 py-12 rounded-lg"
           >
+            <div className="lg:flex lg:flex-row flex flex-col lg:space-y-0 space-y-4 lg:justify-center lg:space-x-2">
+              <div className="flex flex-col w-full">
+                {errors.firstName && (
+                  <span role="alert" className=" text-red-600 text-center">
+                    {errors.firstName.message}
+                  </span>
+                )}
+                <input
+                  placeholder="Όνομα"
+                  {...register("firstName", {
+                    required: "Το όνομα είναι υποχρεωτικό",
+                  })}
+                  className={`p-2  outline-none rounded-md border-2 ${
+                    errors.firstName ? "border-2 border-red-500" : ""
+                  }`}
+                />
+              </div>
+              <div className="flex flex-col w-full">
+                {errors.lastName && (
+                  <span role="alert" className=" text-red-600 text-center">
+                    {errors.lastName.message}
+                  </span>
+                )}
+                <input
+                  placeholder="Επώνυμο"
+                  {...register("lastName", {
+                    required: "Το επώνυμο είναι υποχρεωτικό",
+                  })}
+                  className={`p-2  outline-none rounded-md border-2 ${
+                    errors.lastName ? "border-2 border-red-500" : ""
+                  }`}
+                />
+              </div>
+            </div>
             <div className="flex flex-col">
-              {errors.firstName && (
+              {errors.lastName && (
                 <span role="alert" className=" text-red-600 text-center">
-                  {errors.firstName.message}
+                  {errors.lastName.message}
                 </span>
               )}
               <input
-                placeholder="Όνομα"
-                {...register("firstName", {
-                  required: "Title is Required",
+                placeholder="Email"
+                {...register("lastName", {
+                  required: "Το email είναι υποχρεωτικό",
+                  pattern: {
+                    value: /\S+@\S+\.\S+/,
+                    message: "Μη έγκυρο email.",
+                  },
                 })}
                 className={`p-2  outline-none rounded-md border-2 ${
-                  errors.firstName ? "border-2 border-red-500" : ""
+                  errors.lastName ? "border-2 border-red-500" : ""
                 }`}
               />
             </div>
@@ -83,19 +122,39 @@ const Contact = (props: Props) => {
                   {errors.lastName.message}
                 </span>
               )}
+              <input
+                placeholder="Θεμα"
+                {...register("subject", {
+                  required: "Το θέμα είναι υποχρεωτικό",
+                })}
+                className={`p-2  outline-none rounded-md border-2 ${
+                  errors.subject ? "border-2 border-red-500" : ""
+                }`}
+              />
             </div>
+
             <div className="flex flex-col">
-              {errors.subject && (
+              {errors.message && (
                 <span role="alert" className=" text-red-600 text-center">
-                  {errors.subject.message}
+                  {errors.message.message}
                 </span>
               )}
+              <textarea
+                placeholder="Μηνυμα..."
+                {...register("message", {
+                  required: "Το μήνυμα είναι υποχρεωτικό",
+                })}
+                className={`p-2  outline-none rounded-md border-2 ${
+                  errors.subject ? "border-2 border-red-500" : ""
+                }`}
+              />
             </div>
+
             <button
               type="submit"
-              className="bg-indigo-300 py-4 mx-auto block rounded-md text-gray-700 px-12 mt-4 hover:bg-gray-700 hover:text-indigo-300 transition-all duration-500"
+              className="bg-slate-50 py-4 mx-auto block rounded-md text-gray-900 px-12 mt-4 hover:bg-[#9544cf] hover:text-slate-50 transition-all duration-500"
             >
-              Create
+              Αποστολή
             </button>
           </form>
         </div>

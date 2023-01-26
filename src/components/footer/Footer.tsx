@@ -1,9 +1,13 @@
 import React from "react";
 import { BsTelephone } from "react-icons/bs";
 import { AiOutlineMail, AiOutlineInstagram } from "react-icons/ai";
+import { useSelector } from "react-redux";
+import { state } from "../../types/initial";
+import { NavLink } from "react-router-dom";
 type Props = {};
 
 const Footer = (props: Props) => {
+  const { category } = useSelector((state: state) => state);
   return (
     <div className="flex flex-col  bottom-0">
       <div className=" bg-zinc-800 py-4">
@@ -57,38 +61,18 @@ const Footer = (props: Props) => {
               ΚΑΤΗΓΟΡΙΕΣ
             </h2>
             <ul className="text-gray-200 list-disc text-center space-y-4">
-              <li>
-                <a
-                  href="/"
-                  className="hover:text-[#9544cf]/80 transition-all duration-300"
-                >
-                  ΔΙΕΘΝΗ
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/"
-                  className="hover:text-[#9544cf]/80 transition-all duration-300"
-                >
-                  ΚΟΙΝΩΝΙΑ
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/"
-                  className="hover:text-[#9544cf]/80 transition-all duration-300"
-                >
-                  ΟΙΚΟΝΟΜΙΑ
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/"
-                  className="hover:text-[#9544cf]/80 transition-all duration-300"
-                >
-                  ΠΟΛΙΤΙΚΗ
-                </a>
-              </li>
+              {category.map((cat) => {
+                return (
+                  <li>
+                    <NavLink
+                      className="hover:text-[#9544cf]/80 transition-all duration-300"
+                      to={"/category/" + cat.title}
+                    >
+                      {cat.title}
+                    </NavLink>
+                  </li>
+                );
+              })}
             </ul>
           </div>
           <div className="mt-4">

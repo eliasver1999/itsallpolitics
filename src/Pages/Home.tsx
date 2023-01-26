@@ -84,7 +84,7 @@ const Home = (props: Props) => {
           } justify-center items-center  gap-16 lg:px-12 px-0 mt-12`}
         >
           {blogs.length > 0 ? (
-            blogs.map((blog: blogType) => {
+            blogs.slice(0, 6).map((blog: blogType) => {
               return (
                 <div className="w-full">
                   <ArticleSecond blog={blog} small={false} />
