@@ -7,6 +7,7 @@ import Politics from "./Pages/Politics";
 import SingleArticle from "./Pages/SingleArticle";
 import { getCategories } from "./helpers/category";
 import { getBlogs } from "./helpers/getters";
+import NoMatch from "./Pages/NoMatch";
 
 function App() {
   React.useEffect(() => {
@@ -30,24 +31,9 @@ function App() {
           <Route index element={<Politics />} />
         </Route>
       </Route>
-      <Route path="/category/:id/article/*">
-        <Route path=":id*" element={<SingleArticle />} />
-      </Route>
-      <Route path="/category/ΚΟΙΝΩΝΙΑ/article/*">
-        <Route path=":id?*" element={<SingleArticle />} />
-      </Route>
-      <Route path="/category/ΠΟΛΙΤΙΚΗ/article/*">
-        <Route path=":id" element={<SingleArticle />}>
-          <Route index element={<SingleArticle />} />
-          <Route path=":groupId" element={<SingleArticle />} />
-        </Route>
-      </Route>
-      <Route path="/category/ΟΙΚΟΝΟΜΙΑ/article/*">
-        <Route path=":id" element={<SingleArticle />}>
-          <Route index element={<SingleArticle />} />
-          <Route path=":groupId" element={<SingleArticle />} />
-        </Route>
-      </Route>
+      <Route path="/category/:id/article/:id*" element={<SingleArticle />} />
+
+      <Route path="/category/:id/article/:id?*" element={<NoMatch />} />
     </Routes>
   );
 }
