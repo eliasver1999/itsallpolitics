@@ -77,6 +77,7 @@ const ArticleSecond = ({ blog, small }: Props) => {
                   category: blog.category.title,
                   description: blog.body,
                   id: blog.id,
+                  creator: blog.creator,
                 },
               })
             }
