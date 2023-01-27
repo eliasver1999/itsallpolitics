@@ -26,6 +26,7 @@ const SingleArticle = (props: Props) => {
   const blog: any | blogType = blogs.find(
     (item: blogType) => item.id.toLocaleString() === id
   );
+  console.log(blogs);
   console.log(blogs.find((item: blogType) => item.id.toLocaleString() === id));
   console.log("blog" + blog);
   const filter = blogs.filter(
