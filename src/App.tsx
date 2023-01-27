@@ -35,8 +35,6 @@ function App() {
         path="/category/:categoryId/article/:id"
         element={<SingleArticle />}
       />
-
-      <Route path="/category/:id/article/:id?*" element={<NoMatch />} />
     </Routes>
   );
 }
