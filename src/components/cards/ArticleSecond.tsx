@@ -34,7 +34,8 @@ const ArticleSecond = ({ blog, small }: Props) => {
         </div>
         <div>
           <h3 className="font-thin tracking-widest px-4">
-            {formatDate(new Date(blog.created_at))}|{blog.category.title}
+            {formatDate(new Date(blog.created_at))}|
+            {blog.category ? blog.category.title : ""}
           </h3>
         </div>
         {small ? (
