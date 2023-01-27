@@ -15,6 +15,8 @@ import ArticleSecond from "../components/cards/ArticleSecond";
 import ModernNav from "../components/navbar/ModernNav";
 import SimpleNav from "../components/navbar/SimpleNav";
 import PhoneNavbar from "../components/navbar/PhoneNavbar";
+import { getBlogs } from "../helpers/getters";
+import { getCategories } from "../helpers/category";
 
 type Props = {};
 
@@ -26,10 +28,24 @@ const SingleArticle = (props: Props) => {
   const blog: any | blogType = blogs.find(
     (item: blogType) => item.id.toLocaleString() === id
   );
+  React.useEffect(() => {
+    getBlogs()
+      .then()
+      .catch((error) => {
+        console.log(error);
+      });
+    getCategories()
+      .then()
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   console.log(blogs);
   console.log(blogs.find((item: blogType) => item.id.toLocaleString() === id));
   console.log("blog" + blog);
-
+  const filter = blogs.filter(
+    (item: blogType) => item.id.toLocaleString() !== id
+  );
   const cleanHTML = DOMPurify.sanitize(blog.body, {
     USE_PROFILES: { html: true },
   });
@@ -91,10 +107,10 @@ const SingleArticle = (props: Props) => {
         <div>
           <div className="2xl:mt-32 mt-12 sticky w-[342px] overflow-hidden h-full">
             <span className="text-gray-800 font-semibold tracking-wider">
-              {blogs.length > 0 ? "Πρόσφατα άρθρα" : ""}
+              {filter.length > 0 ? "Πρόσφατα άρθρα" : ""}
             </span>
             <ul className="list-none space-y-4 text-[#333333] tracking-wide mt-4">
-              {blogs.slice(0, 5).map((blog: blogType) => {
+              {filter.slice(0, 5).map((blog: blogType) => {
                 return (
                   <li
                     className="border-b-2 cursor-pointer"
@@ -139,7 +155,7 @@ const SingleArticle = (props: Props) => {
         </div>
         <div className="lg:col-span-3 space-y-4 mt-4">
           <h4 className="text-xl font-thin">
-            {blogs.length > 0 ? "Παρόμοια Άρθρα" : ""}
+            {filter.length > 0 ? "Παρόμοια Άρθρα" : ""}
           </h4>
           <div className="lg:hidden block">
             <Swiper
@@ -150,7 +166,7 @@ const SingleArticle = (props: Props) => {
               onSlideChange={() => console.log("slide change")}
               onSwiper={(swiper) => console.log(swiper)}
             >
-              {blogs.map((blog: blogType) => {
+              {filter.map((blog: blogType) => {
                 return (
                   <SwiperSlide>
                     <ArticleSecond blog={blog} small={true} />
@@ -168,7 +184,7 @@ const SingleArticle = (props: Props) => {
               onSlideChange={() => console.log("slide change")}
               onSwiper={(swiper) => console.log(swiper)}
             >
-              {blogs.map((blog: blogType) => {
+              {filter.map((blog: blogType) => {
                 return (
                   <SwiperSlide>
                     <ArticleSecond blog={blog} small={true} />
