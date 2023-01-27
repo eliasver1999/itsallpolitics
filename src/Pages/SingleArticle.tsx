@@ -46,13 +46,7 @@ const SingleArticle = (props: Props) => {
   const filter = blogs.filter(
     (item: blogType) => item.id.toLocaleString() !== id
   );
-  const cleanHTML = React.useMemo(
-    () =>
-      DOMPurify.sanitize(blog.body, {
-        USE_PROFILES: { html: true },
-      }),
-    [blog]
-  );
+  const cleanHTML = "";
 
   useEffect(() => {});
   return (
