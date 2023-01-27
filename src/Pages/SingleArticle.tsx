@@ -22,7 +22,6 @@ type Props = {};
 
 const SingleArticle = (props: Props) => {
   let { id } = useParams();
-  console.log("id" + id);
   const { blogs, category } = useSelector((state: state) => state);
   const navigate = useNavigate();
   const blog: any | blogType = blogs.find(
@@ -46,9 +45,14 @@ const SingleArticle = (props: Props) => {
   const filter = blogs.filter(
     (item: blogType) => item.id.toLocaleString() !== id
   );
-  const cleanHTML = DOMPurify.sanitize(blog.body, {
-    USE_PROFILES: { html: true },
-  });
+  const cleanHTML = React.useMemo(
+    () =>
+      DOMPurify.sanitize(blog.body, {
+        USE_PROFILES: { html: true },
+      }),
+    [blog]
+  );
+
   useEffect(() => {});
   return (
     <>
