@@ -88,7 +88,7 @@ const Home = (props: Props) => {
             blogs.slice(0, 6).map((blog: blogType) => {
               return (
                 <div className="w-full">
-                  <ArticleSecond blog={blog} small={false} />
+                  <h2></h2>
                 </div>
               );
             })
