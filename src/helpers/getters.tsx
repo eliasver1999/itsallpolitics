@@ -31,3 +31,22 @@ export const getBlogs = function () {
       });
   });
 };
+export const getBlogs2 = function () {
+  const state = store.getState();
+  instance({
+    url: ApiKind.GETBLOGS,
+    method: "GET",
+  })
+    .then((res) => {
+      res.data?.sort(function (a: blogType, b: blogType) {
+        const bDate: any = new Date(b.created_at);
+        const aDate: any = new Date(a.created_at);
+
+        return bDate - aDate;
+      });
+      return res.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};

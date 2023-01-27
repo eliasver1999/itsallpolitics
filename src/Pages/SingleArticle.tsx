@@ -23,35 +23,28 @@ type Props = {};
 const SingleArticle = (props: Props) => {
   let { id } = useParams();
   const { blogs, category } = useSelector((state: state) => state);
+  const [blog, setBlog] = React.useState<blogType>();
   const navigate = useNavigate();
-  const blog: any | blogType = blogs.find(
-    (item: blogType) => item.id.toLocaleString() === id
-  );
+
   React.useEffect(() => {
-    console.log("first");
-    getBlogs()
-      .then()
-      .catch((error) => {
-        console.log(error);
-      });
-    getCategories()
-      .then()
-      .catch((error) => {
-        console.log(error);
-      });
+    if (blogs.length === 0) {
+      getBlogs()
+        .then()
+        .catch((error) => {
+          console.log(error);
+        });
+      getCategories()
+        .then()
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }, []);
-  console.log(blogs);
-  console.log(blogs.find((item: blogType) => item.id.toLocaleString() === id));
-  console.log("blog" + blog);
+  useEffect(() => {
+    setBlog(blogs.find((item: blogType) => item.id.toLocaleString() === id));
+  }, [blogs]);
   const filter = blogs.filter(
     (item: blogType) => item.id.toLocaleString() !== id
-  );
-  const cleanHTML = React.useMemo(
-    () =>
-      DOMPurify.sanitize(blog.body, {
-        USE_PROFILES: { html: true },
-      }),
-    [blog]
   );
 
   useEffect(() => {});
@@ -68,14 +61,13 @@ const SingleArticle = (props: Props) => {
       <div className="h-full 2xl:px-80 lg:px-32 px-4 lg:grid lg:grid-cols-3 mb-32 gap-12 ">
         <div className="lg:col-span-2">
           <h3 className="text-xl font-semibold tracking-wide mt-32">
-            {blog.title}
+            {blog?.title}
           </h3>
           <h4 className="text-lg  tracking-wide font-thin ">
-            Κατηγορία: {blog.category.title}
+            Κατηγορία: {blog?.category.title}
           </h4>
           <img
-            src={ApiKind.IMAGE + blog.image.path}
-            alt={blog.image}
+            src={ApiKind.IMAGE + blog?.image.path}
             width={850}
             className="hover:opacity-40 w-full transition-all duration-500 rounded-lg"
           />
@@ -84,19 +76,35 @@ const SingleArticle = (props: Props) => {
             className=" text-[#3f3f3f] tracking-wide mt-4 lg:block hidden max-w-full overflow-x-hidden"
             style={{ textIndent: "25px" }}
           >
-            <p
-              dangerouslySetInnerHTML={{ __html: cleanHTML }}
-              className="my-4"
-            ></p>
+            {blog?.body ? (
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(blog?.body, {
+                    USE_PROFILES: { html: true },
+                  }),
+                }}
+                className="my-4"
+              ></p>
+            ) : (
+              ""
+            )}
           </p>
           <p
             className=" text-[#3f3f3f] tracking-wide mt-4 lg:hidden block"
             style={{ textIndent: "25px" }}
           >
-            <p
-              dangerouslySetInnerHTML={{ __html: cleanHTML }}
-              className="my-4"
-            ></p>
+            {blog?.body ? (
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(blog?.body, {
+                    USE_PROFILES: { html: true },
+                  }),
+                }}
+                className="my-4"
+              ></p>
+            ) : (
+              ""
+            )}
           </p>
           <h4 className="mt-4 font-semibold text-lg">
             Συντάκτης:{" "}
@@ -107,7 +115,6 @@ const SingleArticle = (props: Props) => {
               </span>
             ))}
           </h4>
-          <Social blog={blog} />
         </div>
         <div>
           <div className="2xl:mt-32 mt-12 sticky w-[342px] overflow-hidden h-full">
