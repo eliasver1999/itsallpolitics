@@ -30,7 +30,7 @@ const SingleArticle = (props: Props) => {
   console.log(blogs.find((item: blogType) => item.id.toLocaleString() === id));
   console.log("blog" + blog);
   const filter = blogs.filter(
-    (item: blogType) => item.id.toLocaleString() === id
+    (item: blogType) => item.id.toLocaleString() !== id
   );
   const cleanHTML = DOMPurify.sanitize(blog.body, {
     USE_PROFILES: { html: true },
