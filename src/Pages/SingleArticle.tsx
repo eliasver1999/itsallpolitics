@@ -28,6 +28,7 @@ const SingleArticle = (props: Props) => {
     (item: blogType) => item.id.toLocaleString() === id
   );
   React.useEffect(() => {
+    console.log("first");
     getBlogs()
       .then()
       .catch((error) => {
