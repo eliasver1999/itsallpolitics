@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../components/footer/Footer";
 import Navbar from "../components/navbar/Navbar";
 import { IoIosArrowForward } from "react-icons/io";
@@ -20,15 +20,18 @@ import { IndexInfo } from "typescript";
 type Props = {};
 
 const SingleArticle = (props: Props) => {
-  const { state } = useLocation();
-  let { id, image, title, date, category, description, creator } = state;
+  let { id } = useParams();
+  const { blogs, category } = useSelector((state: state) => state);
   const navigate = useNavigate();
-  const { blogs } = useSelector((state: state) => state);
-  const categories = useSelector((state: state) => state.category);
-  const cleanHTML = DOMPurify.sanitize(description, {
+  const blog: any | blogType = blogs.find(
+    (item: blogType) => item.id.toLocaleString() === id
+  );
+  const filter = blogs.filter(
+    (item: blogType) => item.id.toLocaleString() !== id
+  );
+  const cleanHTML = DOMPurify.sanitize(blog.body, {
     USE_PROFILES: { html: true },
   });
-  console.log(creator);
   useEffect(() => {});
   return (
     <>
@@ -42,13 +45,15 @@ const SingleArticle = (props: Props) => {
       </div>
       <div className="h-full 2xl:px-80 lg:px-32 px-4 lg:grid lg:grid-cols-3 mb-32 gap-12 ">
         <div className="lg:col-span-2">
-          <h3 className="text-xl font-semibold tracking-wide mt-32">{title}</h3>
+          <h3 className="text-xl font-semibold tracking-wide mt-32">
+            {blog.title}
+          </h3>
           <h4 className="text-lg  tracking-wide font-thin ">
-            Κατηγορία: {category.title}
+            Κατηγορία: {blog.category.title}
           </h4>
           <img
-            src={ApiKind.IMAGE + image}
-            alt={image}
+            src={ApiKind.IMAGE + blog.image.path}
+            alt={blog.image}
             width={850}
             className="hover:opacity-40 w-full transition-all duration-500 rounded-lg"
           />
@@ -73,21 +78,22 @@ const SingleArticle = (props: Props) => {
           </p>
           <h4 className="mt-4 font-semibold text-lg">
             Συντάκτης:{" "}
-            {creator?.map((cr: creator, index: any) => (
+            {blog?.creator.map((cr: creator, index: any) => (
               <span className="font-light">
                 {cr.name}
-                {index === creator?.length - 1 ? "" : ","}
+                {index === blog.creator.length - 1 ? "" : ","}
               </span>
             ))}
           </h4>
+          <Social blog={blog} />
         </div>
         <div>
           <div className="2xl:mt-32 mt-12 sticky w-[342px] overflow-hidden h-full">
             <span className="text-gray-800 font-semibold tracking-wider">
-              {blogs.length > 0 ? "Πρόσφατα άρθρα" : ""}
+              {filter.length > 0 ? "Πρόσφατα άρθρα" : ""}
             </span>
             <ul className="list-none space-y-4 text-[#333333] tracking-wide mt-4">
-              {blogs.slice(0, 5).map((blog: blogType) => {
+              {filter.slice(0, 5).map((blog: blogType) => {
                 return (
                   <li
                     className="border-b-2 cursor-pointer"
@@ -118,7 +124,7 @@ const SingleArticle = (props: Props) => {
                 ΚΑΤΗΓΟΡΙΕΣ
               </span>
               <ul className="list-none space-y-4 text-[#333333] tracking-wide mt-4">
-                {categories.map((cat) => {
+                {category.map((cat) => {
                   return (
                     <li className="border-b-2">
                       <IoIosArrowForward className="inline-block " size={16} />
@@ -132,7 +138,7 @@ const SingleArticle = (props: Props) => {
         </div>
         <div className="lg:col-span-3 space-y-4 mt-4">
           <h4 className="text-xl font-thin">
-            {blogs.length > 0 ? "Παρόμοια Άρθρα" : ""}
+            {filter.length > 0 ? "Παρόμοια Άρθρα" : ""}
           </h4>
           <div className="lg:hidden block">
             <Swiper
@@ -143,7 +149,7 @@ const SingleArticle = (props: Props) => {
               onSlideChange={() => console.log("slide change")}
               onSwiper={(swiper) => console.log(swiper)}
             >
-              {blogs.map((blog: blogType) => {
+              {filter.map((blog: blogType) => {
                 return (
                   <SwiperSlide>
                     <ArticleSecond blog={blog} small={true} />
@@ -161,7 +167,7 @@ const SingleArticle = (props: Props) => {
               onSlideChange={() => console.log("slide change")}
               onSwiper={(swiper) => console.log(swiper)}
             >
-              {blogs.map((blog: blogType) => {
+              {filter.map((blog: blogType) => {
                 return (
                   <SwiperSlide>
                     <ArticleSecond blog={blog} small={true} />
