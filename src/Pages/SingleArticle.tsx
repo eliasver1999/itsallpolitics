@@ -29,7 +29,7 @@ const SingleArticle = (props: Props) => {
   );
   useEffect(() => {
     const blog: any | blogType = blogs.find(
-      (item: blogType) => item.id.toLocaleString() === id
+      (item: blogType) => item.id === Number(id)
     );
     setSingle(blog);
   }, []);
