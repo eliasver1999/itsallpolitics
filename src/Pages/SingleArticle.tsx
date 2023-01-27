@@ -27,18 +27,16 @@ const SingleArticle = (props: Props) => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    if (blogs.length === 0) {
-      getBlogs()
-        .then()
-        .catch((error) => {
-          console.log(error);
-        });
-      getCategories()
-        .then()
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+    getBlogs()
+      .then()
+      .catch((error) => {
+        console.log(error);
+      });
+    getCategories()
+      .then()
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
   useEffect(() => {
     setBlog(blogs.find((item: blogType) => item.id.toLocaleString() === id));
