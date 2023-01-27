@@ -42,12 +42,12 @@ const Contact = (props: Props) => {
   };
   return (
     <div className="justify-center flex flex-col items-center text-center  w-screen">
-      <div className="bg-[#9544cf]/90 lg:w-1/3 lg:px-0 w-screen  rounded-lg py-12">
+      <div className="bg-[#9544cf]/90 xl:w-1/3 lg:px-0 w-screen  rounded-lg py-12">
         <div>
           <h4 className="text-xl text-slate-100 font-semibold">ΕΠΙΚΟΙΝΩΝΙΑ</h4>
         </div>
 
-        <div className="flex flex-col lg:justify-between justify-start items-start px-16 lg:px-48 mt-6">
+        <div className="flex flex-col lg:justify-between justify-center items-center px-16 mt-6">
           <div className="space-x-2">
             <AiOutlineMail size={32} color="white" className="inline-block" />
             <h4 className="inline-block text-slate-50">
@@ -73,7 +73,7 @@ const Contact = (props: Props) => {
             onSubmit={handleSubmit(onSubmit)}
             className="space-y-4  lg:px-16 px-8 py-12 rounded-lg"
           >
-            <div className="lg:flex lg:flex-row flex flex-col lg:space-y-0 space-y-4 lg:justify-center lg:space-x-2">
+            <div className="xl:flex 2xl:flex-row flex flex-col lg:space-y-4 2xl:space-y-0 space-y-4 lg:justify-center 2xl:space-x-2">
               <div className="flex flex-col w-full">
                 {errors.firstName && (
                   <span role="alert" className=" text-red-600 text-center">
