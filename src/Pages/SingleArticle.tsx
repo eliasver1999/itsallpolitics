@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import Footer from "../components/footer/Footer";
 import Navbar from "../components/navbar/Navbar";
 import { IoIosArrowForward } from "react-icons/io";
@@ -15,7 +15,6 @@ import ArticleSecond from "../components/cards/ArticleSecond";
 import ModernNav from "../components/navbar/ModernNav";
 import SimpleNav from "../components/navbar/SimpleNav";
 import PhoneNavbar from "../components/navbar/PhoneNavbar";
-import { IndexInfo } from "typescript";
 
 type Props = {};
 
@@ -128,7 +127,7 @@ const SingleArticle = (props: Props) => {
                   return (
                     <li className="border-b-2">
                       <IoIosArrowForward className="inline-block " size={16} />
-                      <span>{cat.title}</span>
+                      <NavLink to={"/category/" + cat.id}>{cat.title}</NavLink>
                     </li>
                   );
                 })}
