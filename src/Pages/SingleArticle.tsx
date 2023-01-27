@@ -32,7 +32,7 @@ const SingleArticle = (props: Props) => {
       (item: blogType) => item.id === Number(id)
     );
     setSingle(blog);
-  }, []);
+  }, [id]);
   console.log(single);
   const filter = blogs.filter(
     (item: blogType) => item.id.toLocaleString() !== id
