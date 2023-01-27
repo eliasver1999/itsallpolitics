@@ -65,12 +65,16 @@ const Home = (props: Props) => {
         {category.map((cat, i) => {
           return (
             <div>
-              <Categories
-                title={cat.title}
-                image={cat.image.path}
-                up={i % 2 === 0}
-                id={cat.id}
-              />
+              {cat.image ? (
+                <Categories
+                  title={cat.title}
+                  image={cat.image.path}
+                  up={i % 2 === 0}
+                  id={cat.id}
+                />
+              ) : (
+                ""
+              )}
             </div>
           );
         })}
@@ -88,7 +92,7 @@ const Home = (props: Props) => {
             blogs.slice(0, 6).map((blog: blogType) => {
               return (
                 <div className="w-full">
-                  <h2></h2>
+                  <ArticleSecond blog={blog} small={false} />
                 </div>
               );
             })
