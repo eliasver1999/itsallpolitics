@@ -21,21 +21,15 @@ type Props = {};
 const SingleArticle = (props: Props) => {
   let { id } = useParams();
   console.log("id" + id);
-  const [single, setSingle] = React.useState<any>();
   const { blogs, category } = useSelector((state: state) => state);
   const navigate = useNavigate();
   const blog: any | blogType = blogs.find(
     (item: blogType) => item.id.toLocaleString() === id
   );
-  useEffect(() => {
-    const blog: any | blogType = blogs.find(
-      (item: blogType) => item.id === Number(id)
-    );
-    setSingle(blog);
-  }, [id]);
-  console.log(single);
+  console.log(blogs.find((item: blogType) => item.id.toLocaleString() === id));
+  console.log("blog" + blog);
   const filter = blogs.filter(
-    (item: blogType) => item.id.toLocaleString() !== id
+    (item: blogType) => item.id.toLocaleString() === id
   );
   const cleanHTML = DOMPurify.sanitize(blog.body, {
     USE_PROFILES: { html: true },
