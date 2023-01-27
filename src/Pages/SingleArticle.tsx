@@ -29,9 +29,7 @@ const SingleArticle = (props: Props) => {
   console.log(blogs);
   console.log(blogs.find((item: blogType) => item.id.toLocaleString() === id));
   console.log("blog" + blog);
-  const filter = blogs.filter(
-    (item: blogType) => item.id.toLocaleString() !== id
-  );
+
   const cleanHTML = DOMPurify.sanitize(blog.body, {
     USE_PROFILES: { html: true },
   });
@@ -93,10 +91,10 @@ const SingleArticle = (props: Props) => {
         <div>
           <div className="2xl:mt-32 mt-12 sticky w-[342px] overflow-hidden h-full">
             <span className="text-gray-800 font-semibold tracking-wider">
-              {filter.length > 0 ? "Πρόσφατα άρθρα" : ""}
+              {blogs.length > 0 ? "Πρόσφατα άρθρα" : ""}
             </span>
             <ul className="list-none space-y-4 text-[#333333] tracking-wide mt-4">
-              {filter.slice(0, 5).map((blog: blogType) => {
+              {blogs.slice(0, 5).map((blog: blogType) => {
                 return (
                   <li
                     className="border-b-2 cursor-pointer"
@@ -141,7 +139,7 @@ const SingleArticle = (props: Props) => {
         </div>
         <div className="lg:col-span-3 space-y-4 mt-4">
           <h4 className="text-xl font-thin">
-            {filter.length > 0 ? "Παρόμοια Άρθρα" : ""}
+            {blogs.length > 0 ? "Παρόμοια Άρθρα" : ""}
           </h4>
           <div className="lg:hidden block">
             <Swiper
@@ -152,7 +150,7 @@ const SingleArticle = (props: Props) => {
               onSlideChange={() => console.log("slide change")}
               onSwiper={(swiper) => console.log(swiper)}
             >
-              {filter.map((blog: blogType) => {
+              {blogs.map((blog: blogType) => {
                 return (
                   <SwiperSlide>
                     <ArticleSecond blog={blog} small={true} />
@@ -170,7 +168,7 @@ const SingleArticle = (props: Props) => {
               onSlideChange={() => console.log("slide change")}
               onSwiper={(swiper) => console.log(swiper)}
             >
-              {filter.map((blog: blogType) => {
+              {blogs.map((blog: blogType) => {
                 return (
                   <SwiperSlide>
                     <ArticleSecond blog={blog} small={true} />
