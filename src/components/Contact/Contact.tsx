@@ -7,6 +7,7 @@ import {
   AiOutlineMail,
 } from "react-icons/ai";
 import { useSelector } from "react-redux";
+import { sendContact } from "../../helpers/email";
 
 type Props = {};
 interface IFormInput {
@@ -28,7 +29,17 @@ const Contact = (props: Props) => {
     reset,
     formState: { errors },
   } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data, e) => {};
+  const onSubmit: SubmitHandler<IFormInput> = (data, e) => {
+    const formData = new FormData();
+    formData.append("firstName", data.firstName);
+    formData.append("lastName", data.lastName);
+    formData.append("email", data.email);
+    formData.append("subject", data.subject);
+    formData.append("message", data.message);
+    sendContact(formData)
+      .then()
+      .catch((error) => console.log(error));
+  };
   return (
     <div className="justify-center flex flex-col items-center text-center  w-screen">
       <div className="bg-[#9544cf]/90 lg:w-1/3 lg:px-0 w-screen  rounded-lg py-12">
@@ -104,7 +115,7 @@ const Contact = (props: Props) => {
               )}
               <input
                 placeholder="Email"
-                {...register("lastName", {
+                {...register("email", {
                   required: "Το email είναι υποχρεωτικό",
                   pattern: {
                     value: /\S+@\S+\.\S+/,

@@ -99,7 +99,7 @@ const PhoneNavbar = (props: Props) => {
           {category.map((cat) => {
             return (
               <NavLink
-                to={"/category/" + cat.title}
+                to={"/category/" + cat.id}
                 onClick={() => setIsOpen(!isOpen)}
                 className={({ isActive }) =>
                   `${
@@ -111,27 +111,6 @@ const PhoneNavbar = (props: Props) => {
               </NavLink>
             );
           })}
-
-          <NavLink
-            to="/5"
-            className={({ isActive }) =>
-              `${
-                isActive ? "underlined" : "hover-underline-animation"
-              } text-[#545e6f]`
-            }
-          >
-            ΣΧΕΤΙΚΑ ΜΕ ΕΜΑΣ
-          </NavLink>
-          <NavLink
-            to="/6"
-            className={({ isActive }) =>
-              `${
-                isActive ? "underlined" : "hover-underline-animation"
-              } text-[#545e6f]`
-            }
-          >
-            ΕΠΙΚΟΙΝΩΝΙΑ
-          </NavLink>
         </div>
       </motion.nav>
     </div>

@@ -51,7 +51,7 @@ const Politics = (props: Props) => {
         style={{ flex: "1 0 auto" }}
       >
         <div
-          className="h-full -mt-[130px] w-full"
+          className="lg:h-full h-screen lg-mt-[130px] w-full"
           style={{
             backgroundImage: `url(${ApiKind.IMAGE + cat[0]?.image.path})`,
             backgroundColor:

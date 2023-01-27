@@ -8,7 +8,7 @@ type Props = {
 
 const Social = ({ blog }: Props) => {
   return (
-    <div className="w-full bg-gray-400 mt-8 flex justify-end p-4 rounded-md">
+    <div className="w-full bg-gray-100 mt-8 flex justify-end p-4 rounded-md">
       <FacebookShareButton
         url={"https://www.itsallpolitics.gr/category/24/article/10"}
         quote={blog.title}

@@ -47,13 +47,13 @@ const ArticleSecond = ({ blog, small }: Props) => {
                   dangerouslySetInnerHTML={{
                     __html: cleanHTML?.substring(0, 250).concat("..."),
                   }}
-                  className="my-4 inline-block text-ellipsis pl-2"
+                  className="my-4 inline-block text-ellipsis pl-4 lg:px-0"
                 ></p>
               </div>
             ) : (
               <p
                 dangerouslySetInnerHTML={{ __html: cleanHTML }}
-                className="my-4"
+                className="my-4 pl-4"
               ></p>
             )}
           </div>

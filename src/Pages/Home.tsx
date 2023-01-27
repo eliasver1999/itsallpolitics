@@ -94,7 +94,7 @@ const Home = (props: Props) => {
             })
           ) : (
             <h3 className="text-xl font-semibold md:px-64 w-full">
-              No articles Found
+              Δεν βρέθηκαν άρθρα.
             </h3>
           )}
         </div>

@@ -8,7 +8,7 @@ type Props = {
 
 const Blogs = ({ items }: Props) => {
   return (
-    <div className="grid grid-cols-3 mt-12 gap-4 px-20">
+    <div className="grid lg:grid-cols-3 mt-12 gap-4 lg:px-20">
       {items?.map((blog: blogType) => {
         return <ArticleSecond blog={blog} small={false} />;
       })}
