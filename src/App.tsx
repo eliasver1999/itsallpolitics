@@ -31,7 +31,10 @@ function App() {
           <Route index element={<Politics />} />
         </Route>
       </Route>
-      <Route path="/category/:id/article/:id*" element={<SingleArticle />} />
+      <Route
+        path="/category/:categoryId/article/:id"
+        element={<SingleArticle />}
+      />
 
       <Route path="/category/:id/article/:id?*" element={<NoMatch />} />
     </Routes>
