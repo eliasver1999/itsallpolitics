@@ -1,12 +1,6 @@
 import React from "react";
 import Navbar from "../components/navbar/Navbar";
-import {
-  AiFillEye,
-  AiOutlineMail,
-  AiOutlineFacebook,
-  AiOutlineInstagram,
-} from "react-icons/ai";
-import { BsPencilFill, BsCheckAll } from "react-icons/bs";
+
 import { Categories } from "../components/cards/Categories";
 import Footer from "../components/footer/Footer";
 import { useSelector } from "react-redux";
@@ -14,18 +8,54 @@ import { state } from "../types/initial";
 import { blogType } from "../types/blog";
 import PhoneNavbar from "../components/navbar/PhoneNavbar";
 import ArticleSecond from "../components/cards/ArticleSecond";
-import ArticleThird from "../components/cards/ArticleThird";
+import "./global.css";
 import ModernNav from "../components/navbar/ModernNav";
 import SimpleNav from "../components/navbar/SimpleNav";
 import { motion } from "framer-motion";
 import Article from "../components/cards/Article";
 import Contact from "../components/Contact/Contact";
+import Slider from "react-slick";
+import { ApiKind } from "../types/api";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { formatDate } from "../helpers/date";
+import { NavLink, useNavigate } from "react-router-dom";
 type Props = {};
 
 const Home = (props: Props) => {
   const { blogs, category } = useSelector((state: state) => state);
+  const navigate = useNavigate();
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: false,
+    speed: 500,
+    fade: true,
+    autoplaySpeed: 4000,
+
+    pauseOnHover: true,
+    cssEase: "linear",
+    appendDots: (dots: any) => (
+      <div
+        className="absolute"
+        style={{
+          borderRadius: "10px",
+          padding: "5px",
+        }}
+      >
+        <ul
+          style={{ margin: "0px" }}
+          className="relative -top-12 flex justify-center "
+        >
+          {dots}
+        </ul>
+      </div>
+    ),
+  };
   return (
-    <div className="bg-slate-100  z-0 text-gray-700 h-screen  overflow-x-hidden scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#9544cf]/80">
+    <div className="bg-slate-50  z-0 text-gray-700 h-screen  overflow-x-hidden scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#9544cf]/80">
       <div className="xl:hidden block">
         <PhoneNavbar />
       </div>
@@ -35,15 +65,55 @@ const Home = (props: Props) => {
         <ModernNav />
       </div>
       <div></div>
-      <section className="relative top-0 lg:-mt-[450px] mt-12 mx-auto block">
-        <motion.img
+      <section className="relative top-0 lg:-mt-24 mx-auto block ">
+        <div className="lg:w-screen h-1/2 relative">
+          <Slider {...settings}>
+            {blogs.map((blog) => {
+              return (
+                <div
+                  key={blog.id}
+                  className="w-screen lg:h-screen h-[600px] flex justify-center items-center text-center"
+                >
+                  <div className="relative w-screen lg:h-screen h-[600px] ">
+                    <img
+                      src={ApiKind.IMAGE + blog.image.path}
+                      className="w-screen h-full brightness-50"
+                    />
+                    <div className="absolute 2xl:bottom-48 bottom-16 2xl:left-56 md:left-32 space-y-4 md:w-1/2 w-full">
+                      <h4 className="cursor-pointer text-slate-50 2xl:text-3xl text-xl xl:border-b-2 md:text-start text-center py-2 border-[#9544cf]">
+                        <NavLink
+                          to={`/category/${blog.category.id}/article/${blog.id}`}
+                          onClick={() => console.log(blog)}
+                        >
+                          {blog.title}
+                        </NavLink>
+                      </h4>
+                      <div className="flex md:justify-start justify-center">
+                        {blog.creator.map((creator) => {
+                          return (
+                            <h5 className="text-slate-50 xl:text-base text-sm ">
+                              {creator.name} |{" "}
+                              {formatDate(new Date(blog.created_at))} |{" "}
+                              {blog.category.title}
+                            </h5>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </Slider>
+        </div>
+        {/* <motion.img
           src="./assets/test.jpg"
           alt="hero"
           className="mx-auto block"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-        />
+        /> */}
         <div className=" gap-1 mt-12 md:px-64">
           <div className="h-full">
             <h3 className="text-center font-semibold font-sans text-2xl">
