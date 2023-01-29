@@ -68,7 +68,7 @@ const Home = (props: Props) => {
       <section className="relative top-0 lg:-mt-24 mx-auto block ">
         <div className="lg:w-screen h-1/2 relative">
           <Slider {...settings}>
-            {blogs.map((blog) => {
+            {blogs.slice(0, 5).map((blog) => {
               return (
                 <div
                   key={blog.id}
