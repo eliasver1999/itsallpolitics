@@ -8,7 +8,9 @@ import SingleArticle from "./Pages/SingleArticle";
 import { getCategories } from "./helpers/category";
 import { getBlogs } from "./helpers/getters";
 import NoMatch from "./Pages/NoMatch";
-
+import ReactGA from "react-ga";
+const TRACKING_ID = "G-0VHZX96P2T"; // YOUR_OWN_TRACKING_ID
+ReactGA.initialize(TRACKING_ID);
 function App() {
   React.useEffect(() => {
     getBlogs()
