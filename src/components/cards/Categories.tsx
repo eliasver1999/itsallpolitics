@@ -30,13 +30,13 @@ export const Categories = ({ title, image, up, id }: CategoryProps) => {
         transition={{ type: "linear", duration: 0.4 }}
       ></motion.div>
       <div className="w-full absolute top-1/2 flex text-center justify-center">
-        <span
-          className=" py-2 px-6 rounded-sm cursor-pointer text-center text-slate-50"
-          style={{ backgroundColor: "rgba(149, 68, 207,.8)" }}
+        <h4
+          className=" py-2 px-6 rounded-sm cursor-pointer text-center text-slate-50 bg-[#9544cf]"
+          style={{ backgroundColor: "rgba(149, 68, 207,.8) !important" }}
           onClick={() => navigate("/category/" + id)}
         >
           {title}
-        </span>
+        </h4>
       </div>
     </div>
   );
