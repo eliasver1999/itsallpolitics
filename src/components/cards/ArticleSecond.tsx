@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { formatDate } from "../../helpers/date";
 import { ApiKind } from "../../types/api";
 import { blogType } from "../../types/blog";
-
+import "./Article.css";
 type Props = {
   blog: blogType;
   small: boolean;
@@ -42,14 +42,14 @@ const ArticleSecond = ({ blog, small }: Props) => {
         {small ? (
           ""
         ) : (
-          <div>
+          <div className="bg-transparent">
             {cleanHTML?.length > 200 ? (
               <div>
                 <p
                   dangerouslySetInnerHTML={{
                     __html: cleanHTML?.substring(0, 250).concat("..."),
                   }}
-                  className="my-4 inline-block text-ellipsis pl-4 lg:px-0"
+                  className="my-4 inline-block text-ellipsis pl-4 lg:px-0 [&>p]:bg-transparent [&>p>span]:bg-transparent"
                 ></p>
               </div>
             ) : (
