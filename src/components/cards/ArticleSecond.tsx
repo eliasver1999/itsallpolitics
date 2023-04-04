@@ -21,7 +21,7 @@ const ArticleSecond = ({ blog, small }: Props) => {
     <div
       style={{
         backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.8) ),url(${
-          ApiKind.IMAGE + blog.image.path
+          blog.image ? ApiKind.IMAGE + blog.image.path : null
         }) `,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
