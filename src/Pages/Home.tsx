@@ -75,10 +75,12 @@ const Home = (props: Props) => {
                   className="w-screen lg:h-screen h-[600px] flex justify-center items-center text-center"
                 >
                   <div className="relative w-screen lg:h-screen h-[600px] ">
-                    <img
-                      src={ApiKind.IMAGE + blog.image.path}
-                      className="w-screen h-full brightness-50"
-                    />
+                    {blog.image ? (
+                      <img
+                        src={ApiKind.IMAGE + blog.image.path}
+                        className="w-screen h-full brightness-50"
+                      />
+                    ) : null}
                     <div className="absolute 2xl:bottom-48 bottom-16 2xl:left-56 md:left-32 space-y-4 md:w-1/2 w-full">
                       <h4 className="cursor-pointer text-slate-50 2xl:text-3xl text-xl xl:border-b-2 md:text-start text-center py-2 border-[#9544cf]">
                         <NavLink
