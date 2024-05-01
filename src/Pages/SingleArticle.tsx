@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import Footer from "../components/footer/Footer";
 
 import { IoIosArrowForward } from "react-icons/io";
@@ -25,7 +25,7 @@ const SingleArticle = (props: Props) => {
   const { blogs, category } = useSelector((state: state) => state);
   const [blog, setBlog] = React.useState<blogType>();
   const navigate = useNavigate();
-
+  const location =useLocation();
   React.useEffect(() => {
     getBlogs()
       .then()
@@ -40,7 +40,7 @@ const SingleArticle = (props: Props) => {
   }, []);
   useEffect(() => {
     setBlog(blogs.find((item: blogType) => item.id.toLocaleString() === id));
-  }, [blogs, blog]);
+  }, [blogs, blog,location.pathname]);
   const filter = blogs.filter(
     (item: blogType) => item.id.toLocaleString() !== id
   );
@@ -127,28 +127,17 @@ const SingleArticle = (props: Props) => {
                 return (
                   <li
                     className="border-b-2 cursor-pointer"
-                    // onClick={() =>
-                    //   navigate(
-                    //     `/category/${blog.category.id}/article/${blog.id}`,
-                    //     {
-                    //       state: {
-                    //         image: blog.image.path,
-                    //         title: blog.title,
-                    //         date: blog.created_at,
-                    //         category: blog.category.id,
-                    //         description: blog.body,
-                    //         id: blog.id,
-                    //       },
-                    //     }
-                    //   )
-                    // }
+                    onClick={() =>
+                      navigate(
+                        `/category/${blog.category.id}/article/${blog.id}`,
+                   
+                      )
+                    }
                   >
-                    <a
-                      href={`/category/${blog.category.id}/article/${blog.id}`}
-                    >
+                    
                       <IoIosArrowForward className="inline-block " size={16} />
                       <span>{blog.title}</span>
-                    </a>
+                     
                   </li>
                 );
               })}
