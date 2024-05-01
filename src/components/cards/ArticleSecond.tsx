@@ -1,7 +1,8 @@
 import DOMPurify from "dompurify";
 import { ClientRequest } from "http";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+
+import { useNavigate, NavLink } from "react-router-dom";
 import { formatDate } from "../../helpers/date";
 import { ApiKind } from "../../types/api";
 import { blogType } from "../../types/blog";
@@ -31,12 +32,18 @@ const ArticleSecond = ({ blog, small }: Props) => {
     >
       <div className="flex-row lg:px-12 px-0  space-y-2  absolute bottom-12">
         <div>
-          <h3 className="font-semibold tracking-widest px-4">{blog.title}</h3>
+          <h3 className="font-semibold tracking-widest px-4 cursor-pointer">
+            <a href={`/category/${blog.category.id}/article/${blog.id}`}>
+              {blog.title}
+            </a>
+          </h3>
         </div>
         <div>
           <h3 className="font-thin tracking-widest px-4">
             {formatDate(new Date(blog.created_at))}|
-            {blog.category ? blog.category.title : ""}
+            <NavLink to={"/category/" + blog?.category.id}>
+              {blog.category ? blog.category.title : ""}
+            </NavLink>
           </h3>
         </div>
         {small ? (

@@ -11,8 +11,6 @@ import ArticleSecond from "../components/cards/ArticleSecond";
 import "./global.css";
 import ModernNav from "../components/navbar/ModernNav";
 import SimpleNav from "../components/navbar/SimpleNav";
-import { motion } from "framer-motion";
-import Article from "../components/cards/Article";
 import Contact from "../components/Contact/Contact";
 import Slider from "react-slick";
 import { ApiKind } from "../types/api";
@@ -20,6 +18,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { formatDate } from "../helpers/date";
 import { NavLink, useNavigate } from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css';
+
+import { ToastContainer } from "react-toastify";
 type Props = {};
 
 const Home = (props: Props) => {
@@ -56,8 +57,10 @@ const Home = (props: Props) => {
   };
   return (
     <div className="bg-slate-50  z-0 text-gray-700 h-screen  overflow-x-hidden scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#9544cf]/80">
+      <ToastContainer />
       <div className="xl:hidden block">
         <PhoneNavbar />
+        
       </div>
       <div className="xl:block hidden">
         {/* <Navbar /> */}
@@ -96,7 +99,12 @@ const Home = (props: Props) => {
                             <h5 className="text-slate-50 xl:text-base text-sm ">
                               {creator.name} |{" "}
                               {formatDate(new Date(blog.created_at))} |{" "}
-                              {blog.category.title}
+                              <NavLink
+                                to={`/category/${blog.category.id}`}
+                                onClick={() => console.log(blog)}
+                              >
+                                {blog.category.title}
+                              </NavLink>
                             </h5>
                           );
                         })}

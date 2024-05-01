@@ -8,6 +8,7 @@ import {
 } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { sendContact } from "../../helpers/email";
+import { toast } from "react-toastify";
 
 type Props = {};
 interface IFormInput {
@@ -37,9 +38,13 @@ const Contact = (props: Props) => {
     formData.append("subject", data.subject);
     formData.append("message", data.message);
     sendContact(formData)
-      .then()
-      .catch((error) => console.log(error));
+      .then(()=>{
+        reset();
+        toast.success('Email has been sent successfully.',{position: "top-left"})
+      })
+      .catch((error) => toast.error('Email has failed to be sent.',{position:'top-left'}));
   };
+ 
   return (
     <div className="justify-center flex flex-col items-center text-center  w-screen">
       <div className="bg-[#9544cf]/90 xl:w-1/3 lg:px-0 w-screen  rounded-lg py-12">
@@ -76,7 +81,7 @@ const Contact = (props: Props) => {
             <div className="xl:flex 2xl:flex-row flex flex-col lg:space-y-4 2xl:space-y-0 space-y-4 lg:justify-center 2xl:space-x-2">
               <div className="flex flex-col w-full">
                 {errors.firstName && (
-                  <span role="alert" className=" text-red-600 text-center">
+                  <span role="alert" className=" text-white text-center">
                     {errors.firstName.message}
                   </span>
                 )}
@@ -92,7 +97,7 @@ const Contact = (props: Props) => {
               </div>
               <div className="flex flex-col w-full">
                 {errors.lastName && (
-                  <span role="alert" className=" text-red-600 text-center">
+                  <span role="alert" className=" text-white text-center">
                     {errors.lastName.message}
                   </span>
                 )}
@@ -109,7 +114,7 @@ const Contact = (props: Props) => {
             </div>
             <div className="flex flex-col">
               {errors.lastName && (
-                <span role="alert" className=" text-red-600 text-center">
+                <span role="alert" className=" text-white text-center">
                   {errors.lastName.message}
                 </span>
               )}
@@ -129,7 +134,7 @@ const Contact = (props: Props) => {
             </div>
             <div className="flex flex-col">
               {errors.lastName && (
-                <span role="alert" className=" text-red-600 text-center">
+                <span role="alert" className=" text-white text-center">
                   {errors.lastName.message}
                 </span>
               )}
@@ -146,7 +151,7 @@ const Contact = (props: Props) => {
 
             <div className="flex flex-col">
               {errors.message && (
-                <span role="alert" className=" text-red-600 text-center">
+                <span role="alert" className=" text-white text-center">
                   {errors.message.message}
                 </span>
               )}

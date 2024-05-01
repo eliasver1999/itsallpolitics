@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import Footer from "../components/footer/Footer";
-import Navbar from "../components/navbar/Navbar";
+
 import { IoIosArrowForward } from "react-icons/io";
 import { blogType, creator } from "../types/blog";
 import { state } from "../types/initial";
 import { useSelector } from "react-redux";
 import { ApiKind } from "../types/api";
 import DOMPurify from "dompurify";
-import Social from "../components/social/Social";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import ArticleSecond from "../components/cards/ArticleSecond";
@@ -40,11 +40,11 @@ const SingleArticle = (props: Props) => {
   }, []);
   useEffect(() => {
     setBlog(blogs.find((item: blogType) => item.id.toLocaleString() === id));
-  }, [blogs]);
+  }, [blogs, blog]);
   const filter = blogs.filter(
     (item: blogType) => item.id.toLocaleString() !== id
   );
-
+  console.log(blog);
   useEffect(() => {});
   return (
     <>
@@ -62,7 +62,10 @@ const SingleArticle = (props: Props) => {
             {blog?.title}
           </h3>
           <h4 className="text-lg  tracking-wide font-thin ">
-            Κατηγορία: {blog?.category.title}
+            Κατηγορία:{" "}
+            <NavLink to={"/category/" + blog?.category.id}>
+              {blog?.category.title}
+            </NavLink>
           </h4>
           <img
             src={ApiKind.IMAGE + blog?.image.path}
@@ -124,24 +127,28 @@ const SingleArticle = (props: Props) => {
                 return (
                   <li
                     className="border-b-2 cursor-pointer"
-                    onClick={() =>
-                      navigate(
-                        `/category/${blog.category.title}/article/${blog.id}`,
-                        {
-                          state: {
-                            image: blog.image.path,
-                            title: blog.title,
-                            date: blog.created_at,
-                            category: blog.category.title,
-                            description: blog.body,
-                            id: blog.id,
-                          },
-                        }
-                      )
-                    }
+                    // onClick={() =>
+                    //   navigate(
+                    //     `/category/${blog.category.id}/article/${blog.id}`,
+                    //     {
+                    //       state: {
+                    //         image: blog.image.path,
+                    //         title: blog.title,
+                    //         date: blog.created_at,
+                    //         category: blog.category.id,
+                    //         description: blog.body,
+                    //         id: blog.id,
+                    //       },
+                    //     }
+                    //   )
+                    // }
                   >
-                    <IoIosArrowForward className="inline-block " size={16} />
-                    <span>{blog.title}</span>
+                    <a
+                      href={`/category/${blog.category.id}/article/${blog.id}`}
+                    >
+                      <IoIosArrowForward className="inline-block " size={16} />
+                      <span>{blog.title}</span>
+                    </a>
                   </li>
                 );
               })}
