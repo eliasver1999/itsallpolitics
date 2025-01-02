@@ -52,7 +52,7 @@ const Contact = (props: Props) => {
           <h4 className="text-xl text-slate-100 font-semibold">ΕΠΙΚΟΙΝΩΝΙΑ</h4>
         </div>
 
-        <div className="flex flex-col lg:justify-between justify-center items-center px-16 mt-6">
+        <div className="flex flex-col lg:justify-between justify-start items-center px-16 mt-6">
           <div className="space-x-2">
             <AiOutlineMail size={32} color="white" className="inline-block" />
             <h4 className="inline-block text-slate-50">
@@ -67,6 +67,19 @@ const Contact = (props: Props) => {
             />
             <a
               href="https://www.instagram.com/itsallpolitics.gr/"
+              className="inline-block text-slate-50"
+            >
+              itsallpolitics.gr
+            </a>
+          </div>
+          <div className="space-x-2">
+            <AiOutlineFacebook
+              size={32}
+              color="white"
+              className="inline-block"
+            />
+            <a
+              href="https://www.facebook.com/share/1HnyqUr2WN/?mibextid=wwXIfr"
               className="inline-block text-slate-50"
             >
               itsallpolitics.gr

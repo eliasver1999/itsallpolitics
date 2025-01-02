@@ -1,6 +1,6 @@
 import React from "react";
 import { BsTelephone } from "react-icons/bs";
-import { AiOutlineMail, AiOutlineInstagram } from "react-icons/ai";
+import { AiOutlineMail, AiOutlineInstagram, AiOutlineFacebook } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { state } from "../../types/initial";
 import { NavLink } from "react-router-dom";
@@ -89,6 +89,19 @@ const Footer = (props: Props) => {
                 <a
                   className="inline-block"
                   href="https://www.instagram.com/itsallpolitics.gr/"
+                >
+                  itsallpolitics.gr
+                </a>
+              </li>
+              <li>
+                <AiOutlineFacebook
+                  className="inline-block mr-4"
+                  size={22}
+                  color="#9544cf"
+                />
+                <a
+                  className="inline-block"
+                  href="https://www.facebook.com/share/1HnyqUr2WN/?mibextid=wwXIfr"
                 >
                   itsallpolitics.gr
                 </a>

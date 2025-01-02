@@ -74,7 +74,7 @@ const SingleArticle = (props: Props) => {
           />
 
           <p
-            className=" text-[#3f3f3f] tracking-wide mt-4 lg:block hidden max-w-full overflow-x-hidden"
+            className=" text-[#3f3f3f] tracking-wide mt-4 lg:block hidden max-w-full overflow-x-hidden text-justify"
             style={{ textIndent: "25px" }}
           >
             {blog?.body ? (
@@ -91,7 +91,7 @@ const SingleArticle = (props: Props) => {
             )}
           </p>
           <p
-            className=" text-[#3f3f3f] tracking-wide mt-4 lg:hidden block"
+            className=" text-[#3f3f3f] tracking-wide mt-4 lg:hidden block text-justify"
             style={{ textIndent: "25px" }}
           >
             {blog?.body ? (

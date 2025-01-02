@@ -70,51 +70,54 @@ const Home = (props: Props) => {
       <div></div>
       <section className="relative top-0 lg:-mt-24 mx-auto block ">
         <div className="lg:w-screen h-1/2 relative">
-          <Slider {...settings}>
-            {blogs.slice(0, 5).map((blog) => {
-              return (
-                <div
-                  key={blog.id}
-                  className="w-screen lg:h-screen h-[600px] flex justify-center items-center text-center"
-                >
-                  <div className="relative w-screen lg:h-screen h-[600px] ">
-                    {blog.image ? (
-                      <img
-                        src={ApiKind.IMAGE + blog.image.path}
-                        className="w-screen h-full brightness-50"
-                      />
-                    ) : null}
-                    <div className="absolute 2xl:bottom-48 bottom-16 2xl:left-56 md:left-32 space-y-4 md:w-1/2 w-full">
-                      <h4 className="cursor-pointer text-slate-50 2xl:text-3xl text-xl xl:border-b-2 md:text-start text-center py-2 border-[#9544cf]">
-                        <NavLink
-                          to={`/category/${blog.category.id}/article/${blog.id}`}
-                          onClick={() => console.log(blog)}
-                        >
-                          {blog.title}
-                        </NavLink>
-                      </h4>
-                      <div className="flex md:justify-start justify-center">
-                        {blog.creator.map((creator) => {
-                          return (
-                            <h5 className="text-slate-50 xl:text-base text-sm ">
-                              {creator.name} |{" "}
-                              {formatDate(new Date(blog.created_at))} |{" "}
-                              <NavLink
-                                to={`/category/${blog.category.id}`}
-                                onClick={() => console.log(blog)}
-                              >
-                                {blog.category.title}
-                              </NavLink>
-                            </h5>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </Slider>
+        <Slider {...settings}>
+  {blogs.slice(0, 5).map((blog) => {
+    return (
+      <div
+        key={blog.id}
+        className="w-screen lg:h-screen h-[600px] flex justify-center items-center text-center"
+      >
+        <div className="relative w-full lg:h-screen h-[600px]">
+          {blog.image ? (
+            <div className="relative w-screen h-full aspect-w-16 aspect-h-9">
+              <img
+                src={ApiKind.IMAGE + blog.image.path}
+                className="w-full h-full object-cover brightness-50"
+              />
+            </div>
+          ) : null}
+          <div className="absolute 2xl:bottom-48 bottom-16 2xl:left-56 md:left-32 space-y-4 md:w-1/2 w-full">
+            <h4 className="cursor-pointer text-slate-50 2xl:text-3xl text-xl xl:border-b-2 md:text-start text-center py-2 border-[#9544cf]">
+              <NavLink
+                to={`/category/${blog.category.id}/article/${blog.id}`}
+                onClick={() => console.log(blog)}
+              >
+                {blog.title}
+              </NavLink>
+            </h4>
+            <div className="flex md:justify-start justify-center">
+              {blog.creator.map((creator) => {
+                return (
+                  <h5 className="text-slate-50 xl:text-base text-sm">
+                    {creator.name} |{" "}
+                    {formatDate(new Date(blog.created_at))} |{" "}
+                    <NavLink
+                      to={`/category/${blog.category.id}`}
+                      onClick={() => console.log(blog)}
+                    >
+                      {blog.category.title}
+                    </NavLink>
+                  </h5>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  })}
+</Slider>
+
         </div>
         {/* <motion.img
           src="./assets/test.jpg"
