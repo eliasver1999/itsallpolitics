@@ -3,12 +3,36 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/assets/logo.png" />
+    <meta property="og:title" content="itsallpolitics" />
+    <meta
+      property="og:description"
+      content="Πολιτικά άρθρα, αναλύσεις και απόψεις στο itsallpolitics."
+    />
+    <meta
+      property="og:image"
+      content="https://www.itsallpolitics.gr/assets/logo.png"
+    />
+    <meta property="og:url" content="https://www.itsallpolitics.gr" />
+    <meta property="og:type" content="website" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="itsallpolitics" />
+    <meta
+      name="twitter:description"
+      content="Πολιτικά άρθρα, αναλύσεις και απόψεις στο itsallpolitics."
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.itsallpolitics.gr/assets/logo.png"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1"
+    />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="It's All Politics is a newly established website created by students of the Department of Political Science and History at Panteion University. Its main aim is to present political and socio-economic issues in an understandable way and to promote a sense of dialogue on the pressing issues of current affairs."
+      content="It's All Politics is an established website created by students of the Department of Political Science and History at Panteion University. Its main aim is to present political and socio-economic issues in an understandable way and to promote a sense of dialogue on the pressing issues of current affairs."
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
@@ -26,23 +50,28 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>It's All Politics</title>
-    
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-0VHZX96P2T"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-0VHZX96P2T');
-</script>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-0VHZX96P2T"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-0VHZX96P2T");
+    </script>
 
     <style></style>
-    
   </head>
-  <body >
+  <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div><base href="/" />
+    <div id="root"></div>
+    <base href="/" />
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -55,24 +84,27 @@
     -->
   </body>
   <script>
-    window.fbAsyncInit = function() {
+    window.fbAsyncInit = function () {
       FB.init({
-        appId      : '{your-app-id}',
-        cookie     : true,
-        xfbml      : true,
-        version    : '{api-version}'
+        appId: "{your-app-id}",
+        cookie: true,
+        xfbml: true,
+        version: "{api-version}",
       });
-        
-      FB.AppEvents.logPageView();   
-        
+
+      FB.AppEvents.logPageView();
     };
-  
-    (function(d, s, id){
-       var js, fjs = d.getElementsByTagName(s)[0];
-       if (d.getElementById(id)) {return;}
-       js = d.createElement(s); js.id = id;
-       js.src = "https://connect.facebook.net/en_US/sdk.js";
-       fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));
+
+    (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    })(document, "script", "facebook-jssdk");
   </script>
 </html>

@@ -18,6 +18,12 @@ import PhoneNavbar from "../components/navbar/PhoneNavbar";
 import { getBlogs } from "../helpers/getters";
 import { getCategories } from "../helpers/category";
 
+
+// ⭐ import Helmet
+import { Helmet } from "react-helmet-async";
+import ShareButtons from "../components/ShareButtons";
+import { stripHtml } from "./util";
+
 type Props = {};
 
 const SingleArticle = (props: Props) => {
@@ -25,7 +31,8 @@ const SingleArticle = (props: Props) => {
   const { blogs, category } = useSelector((state: state) => state);
   const [blog, setBlog] = React.useState<blogType>();
   const navigate = useNavigate();
-  const location =useLocation();
+  const location = useLocation();
+
   React.useEffect(() => {
     getBlogs()
       .then()
@@ -38,21 +45,44 @@ const SingleArticle = (props: Props) => {
         console.log(error);
       });
   }, []);
+
   useEffect(() => {
     setBlog(blogs.find((item: blogType) => item.id.toLocaleString() === id));
-  }, [blogs, blog,location.pathname]);
+  }, [blogs, location.pathname]); // removed "blog" from deps
+
   const filter = blogs.filter(
     (item: blogType) => item.id.toLocaleString() !== id
   );
-  console.log(blog);
-  useEffect(() => {});
+
+  // ⭐ Build canonical URL for share/meta
+  const origin =
+    typeof window !== "undefined" ? 'https://www.itsallpolitics.gr' : "https://www.itsallpolitics.gr";
+  const articleUrl = `${origin}${location.pathname}`;
+  console.log(articleUrl)
+  // ⭐ Prepare meta data safely
+  const metaTitle = blog?.title
+    ? `${blog.title} | itsallpolitics`
+    : "Άρθρο |  itsallpolitics";
+
+  // basic fallback description if you don't have one in blog
+  const metaDescription =
+    blog?.body
+      ? stripHtml(blog.body).slice(0, 150) + "..."
+      : "Διαβάστε το άρθρο μας στο https://www.itsallpolitics.gr/.";
+
+  const metaImage = blog?.image?.path
+    ? ApiKind.IMAGE + blog.image.path
+    : `${origin}/default-og-image.jpg`; // add a default image in public if you want
+
   return (
     <>
+      {/* ⭐ Open Graph + Twitter meta tags */}
+      
+
       <div className="xl:hidden block">
         <PhoneNavbar />
       </div>
       <div className="xl:block hidden">
-        {/* <Navbar /> */}
         <SimpleNav />
         <ModernNav />
       </div>
@@ -61,6 +91,9 @@ const SingleArticle = (props: Props) => {
           <h3 className="text-xl font-semibold tracking-wide mt-32">
             {blog?.title}
           </h3>
+
+          {blog && <ShareButtons url={articleUrl} title={blog.title} />}
+
           <h4 className="text-lg  tracking-wide font-thin ">
             Κατηγορία:{" "}
             <NavLink to={"/category/" + blog?.category.id}>
@@ -109,14 +142,17 @@ const SingleArticle = (props: Props) => {
           </p>
           <h4 className="mt-4 font-semibold text-lg">
             Συντάκτης:{" "}
-            {blog?.creator.map((cr: creator, index: any) => (
-              <span className="font-light">
+            {blog?.creator.map((cr: creator, index: number) => (
+              <span className="font-light" key={cr.name + index}>
                 {cr.name}
                 {index === blog.creator.length - 1 ? "" : ","}
               </span>
             ))}
           </h4>
         </div>
+
+        {/* ... rest of your component unchanged ... */}
+
         <div>
           <div className="2xl:mt-32 mt-12 sticky w-[342px] overflow-hidden h-full">
             <span className="text-gray-800 font-semibold tracking-wider">
@@ -126,18 +162,16 @@ const SingleArticle = (props: Props) => {
               {filter.slice(0, 5).map((blog: blogType) => {
                 return (
                   <li
+                    key={blog.id}
                     className="border-b-2 cursor-pointer"
                     onClick={() =>
                       navigate(
-                        `/category/${blog.category.id}/article/${blog.id}`,
-                   
+                        `/category/${blog.category.id}/article/${blog.id}`
                       )
                     }
                   >
-                    
-                      <IoIosArrowForward className="inline-block " size={16} />
-                      <span>{blog.title}</span>
-                     
+                    <IoIosArrowForward className="inline-block " size={16} />
+                    <span>{blog.title}</span>
                   </li>
                 );
               })}
@@ -149,7 +183,7 @@ const SingleArticle = (props: Props) => {
               <ul className="list-none space-y-4 text-[#333333] tracking-wide mt-4">
                 {category.map((cat) => {
                   return (
-                    <li className="border-b-2">
+                    <li className="border-b-2" key={cat.id}>
                       <IoIosArrowForward className="inline-block " size={16} />
                       <NavLink to={"/category/" + cat.id}>{cat.title}</NavLink>
                     </li>
@@ -159,6 +193,7 @@ const SingleArticle = (props: Props) => {
             </div>
           </div>
         </div>
+
         <div className="lg:col-span-3 space-y-4 mt-4">
           <h4 className="text-xl font-thin">
             {filter.length > 0 ? "Παρόμοια Άρθρα" : ""}
@@ -169,12 +204,10 @@ const SingleArticle = (props: Props) => {
               slidesPerView={1}
               navigation
               pagination={{ clickable: true }}
-              onSlideChange={() => console.log("slide change")}
-              onSwiper={(swiper) => console.log(swiper)}
             >
               {filter.map((blog: blogType) => {
                 return (
-                  <SwiperSlide>
+                  <SwiperSlide key={blog.id}>
                     <ArticleSecond blog={blog} small={true} />
                   </SwiperSlide>
                 );
@@ -187,12 +220,10 @@ const SingleArticle = (props: Props) => {
               slidesPerView={3}
               navigation
               pagination={{ clickable: true }}
-              onSlideChange={() => console.log("slide change")}
-              onSwiper={(swiper) => console.log(swiper)}
             >
               {filter.map((blog: blogType) => {
                 return (
-                  <SwiperSlide>
+                  <SwiperSlide key={blog.id}>
                     <ArticleSecond blog={blog} small={true} />
                   </SwiperSlide>
                 );

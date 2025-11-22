@@ -1,6 +1,6 @@
 import React from "react";
 import { BsTelephone } from "react-icons/bs";
-import { AiOutlineMail, AiOutlineInstagram, AiOutlineFacebook } from "react-icons/ai";
+import { AiOutlineMail, AiOutlineInstagram, AiOutlineFacebook, AiOutlineLinkedin } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { state } from "../../types/initial";
 import { NavLink } from "react-router-dom";
@@ -17,12 +17,7 @@ const Footer = (props: Props) => {
               ΣΧΕΤΙΚΑ ΜΕ ΕΜΑΣ
             </h3>
             <p className="text-gray-200 text-justify">
-              Το It's All Politics είναι ένα νεοσύστατο site που δημιουργήθηκε
-              από φοιτητές του τμήματος Πολιτικής Επιστήμης & Ιστορίας του
-              Παντείου Πανεπιστημίου. Κύριο μέλημα ειναι να παρουσιάζονται με
-              κατανοητό τρόπο θέματα πολιτικά και κοινωνικοοικονομικά και να
-              προωθηθεί το αίσθημα του διαλόγου στα φλέγοντα ζητήματα της
-              επικαιρότητας.
+              Το It's All Politics είναι μια ιστοσελίδα αναλύσεων που συνδυάζει την ακαδημαϊκή προσέγγιση με τη σύγχρονη ματιά πάνω στην πολιτική, την οικονομία, την κοινωνία και την ιστορία. Δημιουργήθηκε από αποφοίτους του Τμήματος Πολιτικής Επιστήμης και Ιστορίας του Παντείου Πανεπιστημίου. Κύριο μέλημά είναι η παρουσίαση σύνθετων πολιτικών και κοινωνικοοικονομικών ζητημάτων με κατανοητό τρόπο και η ενίσχυση του διαλόγου γύρω από τα κρίσιμα θέματα της επικαιρότητας.  
             </p>
           </div>
           <div className="mt-4">
@@ -101,7 +96,20 @@ const Footer = (props: Props) => {
                 />
                 <a
                   className="inline-block"
-                  href="https://www.facebook.com/share/1HnyqUr2WN/?mibextid=wwXIfr"
+                  href="https://www.facebook.com/profile.php?id=100091351862257"
+                >
+                  itsallpolitics.gr
+                </a>
+              </li>
+              <li>
+                <AiOutlineLinkedin
+                  className="inline-block mr-4"
+                  size={22}
+                  color="#9544cf"
+                />
+                <a
+                  className="inline-block"
+                  href="https://www.linkedin.com/company/its-all-politics-gr/"
                 >
                   itsallpolitics.gr
                 </a>

@@ -9,6 +9,8 @@ import { getCategories } from "./helpers/category";
 import { getBlogs } from "./helpers/getters";
 import NoMatch from "./Pages/NoMatch";
 import ReactGA from "react-ga";
+import CookieBanner from "./components/CookieBanner/CookieBanner";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 const TRACKING_ID = "G-0VHZX96P2T"; // YOUR_OWN_TRACKING_ID
 ReactGA.initialize(TRACKING_ID);
 function App() {
@@ -25,19 +27,23 @@ function App() {
       });
   }, []);
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
-      <Route path="/category/*">
-        <Route path=":category" element={<Politics />}>
-          <Route index element={<Politics />} />
+        <Route path="/category/*">
+          <Route path=":category" element={<Politics />}>
+            <Route index element={<Politics />} />
+          </Route>
         </Route>
-      </Route>
-      <Route
-        path="/category/:categoryId/article/:id"
-        element={<SingleArticle />}
-      />
-    </Routes>
+        <Route
+          path="/category/:categoryId/article/:id"
+          element={<SingleArticle />}
+        />
+      </Routes>
+      <CookieBanner />
+    </>
   );
 }
 

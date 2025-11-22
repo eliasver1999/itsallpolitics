@@ -99,17 +99,19 @@ const Home = (props: Props) => {
               {blog.creator.map((creator) => {
                 return (
                   <h5 className="text-slate-50 xl:text-base text-sm">
-                    {creator.name} |{" "}
-                    {formatDate(new Date(blog.created_at))} |{" "}
+                    {creator.name}-
+                  </h5>
+                );
+              })}
+               <h5 className="text-slate-50 xl:text-base text-sm">
+              {formatDate(new Date(blog.created_at))} |{" "}
                     <NavLink
                       to={`/category/${blog.category.id}`}
                       onClick={() => console.log(blog)}
                     >
                       {blog.category.title}
                     </NavLink>
-                  </h5>
-                );
-              })}
+                </h5>
             </div>
           </div>
         </div>
@@ -133,12 +135,7 @@ const Home = (props: Props) => {
               Καλωσήλθατε
             </h3>
             <h4 className=" lg:text-start text-center text-[#3f3f3f] w-full mx-auto mt-4">
-              Το It's All Politics είναι ένα νεοσύστατο site που δημιουργήθηκε
-              από φοιτητές του τμήματος Πολιτικής Επιστήμης & Ιστορίας του
-              Παντείου Πανεπιστημίου. Κύριο μέλημα ειναι να παρουσιάζονται με
-              κατανοητό τρόπο θέματα πολιτικά και κοινωνικοοικονομικά και να
-              προωθηθεί το αίσθημα του διαλόγου στα φλέγοντα ζητήματα της
-              επικαιρότητας.
+              Το It's All Politics είναι μια ιστοσελίδα αναλύσεων που συνδυάζει την ακαδημαϊκή προσέγγιση με τη σύγχρονη ματιά πάνω στην πολιτική, την οικονομία, την κοινωνία και την ιστορία. Δημιουργήθηκε από αποφοίτους του Τμήματος Πολιτικής Επιστήμης και Ιστορίας του Παντείου Πανεπιστημίου. Κύριο μέλημά είναι η παρουσίαση σύνθετων πολιτικών και κοινωνικοοικονομικών ζητημάτων με κατανοητό τρόπο και η ενίσχυση του διαλόγου γύρω από τα κρίσιμα θέματα της επικαιρότητας.
             </h4>
           </div>
         </div>

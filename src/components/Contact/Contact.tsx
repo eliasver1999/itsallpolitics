@@ -4,6 +4,7 @@ import { SubmitHandler } from "react-hook-form/dist/types";
 import {
   AiOutlineFacebook,
   AiOutlineInstagram,
+  AiOutlineLinkedin,
   AiOutlineMail,
 } from "react-icons/ai";
 import { useSelector } from "react-redux";
@@ -79,7 +80,20 @@ const Contact = (props: Props) => {
               className="inline-block"
             />
             <a
-              href="https://www.facebook.com/share/1HnyqUr2WN/?mibextid=wwXIfr"
+              href="https://www.facebook.com/profile.php?id=100091351862257"
+              className="inline-block text-slate-50"
+            >
+              itsallpolitics.gr
+            </a>
+          </div>
+           <div className="space-x-2">
+            <AiOutlineLinkedin
+              size={32}
+              color="white"
+              className="inline-block"
+            />
+            <a
+              href="https://www.linkedin.com/company/its-all-politics-gr/"
               className="inline-block text-slate-50"
             >
               itsallpolitics.gr
