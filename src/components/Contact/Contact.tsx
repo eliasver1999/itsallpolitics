@@ -83,7 +83,7 @@ const Contact = (props: Props) => {
               href="https://www.facebook.com/profile.php?id=100091351862257"
               className="inline-block text-slate-50"
             >
-              itsallpolitics.gr
+              It's All Politics 
             </a>
           </div>
            <div className="space-x-2">

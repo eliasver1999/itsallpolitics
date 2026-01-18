@@ -93,7 +93,7 @@ const SingleArticle = (props: Props) => {
             {blog?.title}
           </h3>
 
-          {blog && <ShareButtons blogId={blog.id} blogTitle={blog.title} />}
+          {/* {blog && <ShareButtons blogId={blog.id} blogTitle={blog.title} />} */}
 
           <h4 className="text-lg tracking-wide font-thin">
             Κατηγορία:{" "}

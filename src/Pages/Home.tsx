@@ -101,7 +101,7 @@ const Home = (props: Props) => {
                       <div className="flex md:justify-start justify-center">
                         {blog.creator.map((creator, index) => (
                           <h5 key={index || creator.name} className="text-slate-50 xl:text-base text-sm">
-                            {creator.name}-
+                            {creator.name} |{" "}
                           </h5>
                         ))}
                         <h5 className="text-slate-50 xl:text-base text-sm">

@@ -37,10 +37,7 @@
 .article-content ul ul ul {
   list-style-type: square;
 }
-
-.article-content p {
-  margin-bottom: 1rem;
-}
+ 
 
 .article-content h1, .article-content h2, .article-content h3, 
 .article-content h4, .article-content h5, .article-content h6 {
