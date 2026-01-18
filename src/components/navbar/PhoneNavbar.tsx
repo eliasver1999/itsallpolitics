@@ -96,9 +96,10 @@ const PhoneNavbar = (props: Props) => {
           >
             ΑΡΧΙΚΗ
           </NavLink>
-          {category.map((cat) => {
+          {Array.isArray(category) && category.map((cat) => {
             return (
               <NavLink
+                key={cat.id}
                 to={"/category/" + cat.id}
                 onClick={() => setIsOpen(!isOpen)}
                 className={({ isActive }) =>

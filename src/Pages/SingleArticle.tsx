@@ -18,6 +18,7 @@ import PhoneNavbar from "../components/navbar/PhoneNavbar";
 import { getBlogs } from "../helpers/getters";
 import { getCategories } from "../helpers/category";
 
+import "./article.css";
 
 // ⭐ import Helmet
 import { Helmet } from "react-helmet-async";
@@ -92,7 +93,7 @@ const SingleArticle = (props: Props) => {
             {blog?.title}
           </h3>
 
-          {blog && <ShareButtons url={articleUrl} title={blog.title} />}
+          {blog && <ShareButtons blogId={blog.id} blogTitle={blog.title} />}
 
           <h4 className="text-lg  tracking-wide font-thin ">
             Κατηγορία:{" "}
@@ -106,40 +107,40 @@ const SingleArticle = (props: Props) => {
             className="hover:opacity-40 w-full transition-all duration-500 rounded-lg"
           />
 
-          <p
-            className=" text-[#3f3f3f] tracking-wide mt-4 lg:block hidden max-w-full overflow-x-hidden text-justify"
+          <div
+            className="text-[#3f3f3f] tracking-wide mt-4 lg:block hidden max-w-full overflow-x-hidden text-justify prose prose-lg max-w-none"
             style={{ textIndent: "25px" }}
           >
             {blog?.body ? (
-              <p
+              <div
                 dangerouslySetInnerHTML={{
                   __html: DOMPurify.sanitize(blog?.body, {
                     USE_PROFILES: { html: true },
                   }),
                 }}
-                className="my-4"
-              ></p>
+                className="article-content"
+              />
             ) : (
               ""
             )}
-          </p>
-          <p
-            className=" text-[#3f3f3f] tracking-wide mt-4 lg:hidden block text-justify"
+          </div>
+          <div
+            className="text-[#3f3f3f] tracking-wide mt-4 lg:hidden block text-justify prose prose-lg max-w-none"
             style={{ textIndent: "25px" }}
           >
             {blog?.body ? (
-              <p
+              <div
                 dangerouslySetInnerHTML={{
                   __html: DOMPurify.sanitize(blog?.body, {
                     USE_PROFILES: { html: true },
                   }),
                 }}
-                className="my-4"
-              ></p>
+                className="article-content"
+              />
             ) : (
               ""
             )}
-          </p>
+          </div>
           <h4 className="mt-4 font-semibold text-lg">
             Συντάκτης:{" "}
             {blog?.creator.map((cr: creator, index: number) => (

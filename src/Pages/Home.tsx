@@ -12,6 +12,7 @@ import "./global.css";
 import ModernNav from "../components/navbar/ModernNav";
 import SimpleNav from "../components/navbar/SimpleNav";
 import Contact from "../components/Contact/Contact";
+import Newsletter from "../components/Newsletter/Newsletter";
 import Slider from "react-slick";
 import { ApiKind } from "../types/api";
 import "slick-carousel/slick/slick.css";
@@ -26,6 +27,7 @@ type Props = {};
 const Home = (props: Props) => {
   const { blogs, category } = useSelector((state: state) => state);
   const navigate = useNavigate();
+  console.log("category",category)
   const settings = {
     dots: true,
     infinite: true,
@@ -96,9 +98,9 @@ const Home = (props: Props) => {
               </NavLink>
             </h4>
             <div className="flex md:justify-start justify-center">
-              {blog.creator.map((creator) => {
+              {blog.creator.map((creator,index) => {
                 return (
-                  <h5 className="text-slate-50 xl:text-base text-sm">
+                  <h5 key={index|| creator.name} className="text-slate-50 xl:text-base text-sm">
                     {creator.name}-
                   </h5>
                 );
@@ -142,9 +144,9 @@ const Home = (props: Props) => {
       </section>
 
       <section className="grid lg:grid-cols-4 mt-16 mb-16">
-        {category.map((cat, i) => {
+        {Array.isArray(category) && category.length > 0 && category.map((cat, i) => {
           return (
-            <div>
+            <div key={cat.id}>
               {cat.image ? (
                 <Categories
                   title={cat.title}
@@ -182,6 +184,9 @@ const Home = (props: Props) => {
             </h3>
           )}
         </div>
+      </section>
+      <section className="mb-12">
+        <Newsletter />
       </section>
       <section className="flex flex-col justify-center mb-12">
         <Contact />

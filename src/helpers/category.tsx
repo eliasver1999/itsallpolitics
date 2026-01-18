@@ -10,13 +10,28 @@ export const getCategories = function () {
       method: "GET",
     })
       .then((res) => {
+        // Validate that response is an array
+        if (Array.isArray(res.data)) {
+          store.dispatch({
+            type: CategoryActionKind.GETALLCATEGORIES,
+            payload: res.data,
+          });
+          resolve("Categories loaded successfully");
+        } else {
+          console.error("Invalid category data format:", res.data);
+          store.dispatch({
+            type: CategoryActionKind.GETALLCATEGORIES,
+            payload: [],
+          });
+          reject("Invalid data format received from API");
+        }
+      })
+      .catch((error: any) => {
+        console.error("Failed to fetch categories:", error);
         store.dispatch({
           type: CategoryActionKind.GETALLCATEGORIES,
-          payload: res.data,
+          payload: [],
         });
-        resolve(res.data.message);
-      })
-      .catch((error: string) => {
         reject(error);
       });
   });

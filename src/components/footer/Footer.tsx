@@ -56,9 +56,9 @@ const Footer = (props: Props) => {
               ΚΑΤΗΓΟΡΙΕΣ
             </h2>
             <ul className="text-gray-200 list-disc text-center space-y-4">
-              {category.map((cat) => {
+              {Array.isArray(category) && category.map((cat) => {
                 return (
-                  <li>
+                  <li key={cat.id}>
                     <NavLink
                       className="hover:text-[#9544cf]/80 transition-all duration-300"
                       to={"/category/" + cat.id}

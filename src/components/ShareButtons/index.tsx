@@ -1,82 +1,66 @@
 // ShareButtons.tsx
 import React from "react";
 
-type ShareButtonsProps = {
-  url: string;
-  title: string;
-};
+interface ShareButtonsProps {
+  blogId: number | string;
+  blogTitle: string;
+}
 
-const ShareButtons: React.FC<ShareButtonsProps> = ({ url, title }) => {
-  const encodedUrl = encodeURIComponent(url);
-  const encodedTitle = encodeURIComponent(title);
+const ShareButtons: React.FC<ShareButtonsProps> = ({ blogId, blogTitle }) => {
+  // Laravel share route
+  const shareUrl = `https://katelin-famished-crisply.ngrok-free.dev/blog/share/${blogId}`;
+  const encodedUrl = encodeURIComponent(shareUrl);
+  const encodedTitle = encodeURIComponent(blogTitle);
 
-  const shareLinks = {
-    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
-    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
-    twitter: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
-    whatsapp: `https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`,
+  const openPopup = (url: string) => {
+    window.open(url, "shareWindow", "width=600,height=400,noopener,noreferrer");
   };
 
-  const handleCopyLink = async () => {
-    try {
-      await navigator.clipboard.writeText(url);
-      alert("Link copied to clipboard!");
-    } catch (err) {
-      console.error("Failed to copy!", err);
-      alert("Could not copy the link, please copy it manually.");
-    }
+  const shareOnFacebook = () => {
+    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+    openPopup(url);
   };
 
-  const buttonStyle: React.CSSProperties = {
-    border: "1px solid #e5e7eb",
-    borderRadius: "999px",
-    padding: "0.3rem 0.7rem",
-    fontSize: "0.8rem",
-    cursor: "pointer",
-    background: "white",
-    textDecoration: "none",
+  const shareOnTwitter = () => {
+    const url = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`;
+    openPopup(url);
+  };
+
+  const shareOnLinkedIn = () => {
+    const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
+    openPopup(url);
+  };
+
+  const shareOnWhatsApp = () => {
+    const url = `https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`;
+    openPopup(url);
   };
 
   return (
-    <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-      <a
-        href={shareLinks.facebook}
-        target="_blank"
-        rel="noopener noreferrer"
-        style={buttonStyle}
+    <div className="share-buttons flex gap-2">
+      <button
+        onClick={shareOnFacebook}
+        className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
       >
         Facebook
-      </a>
-
-      <a
-        href={shareLinks.linkedin}
-        target="_blank"
-        rel="noopener noreferrer"
-        style={buttonStyle}
+      </button>
+      <button
+        onClick={shareOnTwitter}
+        className="bg-blue-400 text-white px-3 py-1 rounded hover:bg-blue-500"
+      >
+        Twitter
+      </button>
+      <button
+        onClick={shareOnLinkedIn}
+        className="bg-blue-800 text-white px-3 py-1 rounded hover:bg-blue-900"
       >
         LinkedIn
-      </a>
-
-      <a
-        href={shareLinks.twitter}
-        target="_blank"
-        rel="noopener noreferrer"
-        style={buttonStyle}
-      >
-        X / Twitter
-      </a>
-
-      <a
-        href={shareLinks.whatsapp}
-        target="_blank"
-        rel="noopener noreferrer"
-        style={buttonStyle}
+      </button>
+      <button
+        onClick={shareOnWhatsApp}
+        className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
       >
         WhatsApp
-      </a>
-
-      <button type="button" onClick={handleCopyLink} style={buttonStyle}>
-        Copy link
       </button>
     </div>
   );
