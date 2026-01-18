@@ -4,8 +4,10 @@ import React from "react";
 
 import { useNavigate, NavLink } from "react-router-dom";
 import { formatDate } from "../../helpers/date";
+import { calculateReadingTime } from "../../helpers/readingTime";
 import { ApiKind } from "../../types/api";
 import { blogType } from "../../types/blog";
+import TagList from "../Tags/TagList";
 import "./Article.css";
 type Props = {
   blog: blogType;
@@ -39,12 +41,21 @@ const ArticleSecond = ({ blog, small }: Props) => {
           </h3>
         </div>
         <div>
-          <h3 className="font-thin tracking-widest px-4">
-            {formatDate(new Date(blog.created_at))}|
+          <h3 className="font-thin tracking-widest px-4 flex items-center gap-2 flex-wrap">
+            {formatDate(new Date(blog.created_at))} | 
             <NavLink to={"/category/" + blog?.category.id}>
               {blog.category ? blog.category.title : ""}
             </NavLink>
+            <span className="text-xs bg-white/20 px-2 py-1 rounded">
+              {calculateReadingTime(blog.body)}
+            </span>
           </h3>
+          {/* Tags */}
+          {blog.tags && blog.tags.length > 0 && (
+            <div className="px-4 mt-2">
+              <TagList tags={blog.tags} size="sm" limit={3} />
+            </div>
+          )}
         </div>
         {small ? (
           ""

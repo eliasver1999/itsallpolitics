@@ -17,6 +17,8 @@ import SimpleNav from "../components/navbar/SimpleNav";
 import PhoneNavbar from "../components/navbar/PhoneNavbar";
 import { getBlogs } from "../helpers/getters";
 import { getCategories } from "../helpers/category";
+import { getRelatedArticles } from "../helpers/relatedArticles";
+import TagList from "../components/Tags/TagList";
 
 import "./article.css";
 
@@ -51,9 +53,7 @@ const SingleArticle = (props: Props) => {
     setBlog(blogs.find((item: blogType) => item.id.toLocaleString() === id));
   }, [blogs, location.pathname]); // removed "blog" from deps
 
-  const filter = blogs.filter(
-    (item: blogType) => item.id.toLocaleString() !== id
-  );
+  const relatedArticles = blog ? getRelatedArticles(blog, blogs, 6) : [];
 
   // ⭐ Build canonical URL for share/meta
   const origin =
@@ -95,12 +95,20 @@ const SingleArticle = (props: Props) => {
 
           {blog && <ShareButtons blogId={blog.id} blogTitle={blog.title} />}
 
-          <h4 className="text-lg  tracking-wide font-thin ">
+          <h4 className="text-lg tracking-wide font-thin">
             Κατηγορία:{" "}
             <NavLink to={"/category/" + blog?.category.id}>
               {blog?.category.title}
             </NavLink>
           </h4>
+
+          {/* Tags */}
+          {blog?.tags && blog.tags.length > 0 && (
+            <div className="mb-4">
+              <TagList tags={blog.tags} size="md" />
+            </div>
+          )}
+
           <img
             src={ApiKind.IMAGE + blog?.image.path}
             width={850}
@@ -144,10 +152,14 @@ const SingleArticle = (props: Props) => {
           <h4 className="mt-4 font-semibold text-lg">
             Συντάκτης:{" "}
             {blog?.creator.map((cr: creator, index: number) => (
-              <span className="font-light" key={cr.name + index}>
+              <NavLink 
+                key={cr.name + index}
+                to={`/author/${encodeURIComponent(cr.name)}`}
+                className="font-light hover:text-[#9544cf] transition-colors"
+              >
                 {cr.name}
-                {index === blog.creator.length - 1 ? "" : ","}
-              </span>
+                {index === blog.creator.length - 1 ? "" : ", "}
+              </NavLink>
             ))}
           </h4>
         </div>
@@ -157,10 +169,10 @@ const SingleArticle = (props: Props) => {
         <div>
           <div className="2xl:mt-32 mt-12 sticky w-[342px] overflow-hidden h-full">
             <span className="text-gray-800 font-semibold tracking-wider">
-              {filter.length > 0 ? "Πρόσφατα άρθρα" : ""}
+              {relatedArticles.length > 0 ? "Πρόσφατα άρθρα" : ""}
             </span>
             <ul className="list-none space-y-4 text-[#333333] tracking-wide mt-4">
-              {filter.slice(0, 5).map((blog: blogType) => {
+              {relatedArticles.slice(0, 5).map((blog: blogType) => {
                 return (
                   <li
                     key={blog.id}
@@ -197,7 +209,7 @@ const SingleArticle = (props: Props) => {
 
         <div className="lg:col-span-3 space-y-4 mt-4">
           <h4 className="text-xl font-thin">
-            {filter.length > 0 ? "Παρόμοια Άρθρα" : ""}
+            {relatedArticles.length > 0 ? "Σχετικά Άρθρα" : ""}
           </h4>
           <div className="lg:hidden block">
             <Swiper
@@ -206,7 +218,7 @@ const SingleArticle = (props: Props) => {
               navigation
               pagination={{ clickable: true }}
             >
-              {filter.map((blog: blogType) => {
+              {relatedArticles.map((blog: blogType) => {
                 return (
                   <SwiperSlide key={blog.id}>
                     <ArticleSecond blog={blog} small={true} />
@@ -222,7 +234,7 @@ const SingleArticle = (props: Props) => {
               navigation
               pagination={{ clickable: true }}
             >
-              {filter.map((blog: blogType) => {
+              {relatedArticles.map((blog: blogType) => {
                 return (
                   <SwiperSlide key={blog.id}>
                     <ArticleSecond blog={blog} small={true} />

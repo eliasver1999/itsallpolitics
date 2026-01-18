@@ -6,6 +6,7 @@ import Home from "./Pages/Home";
 import Politics from "./Pages/Politics";
 import SingleArticle from "./Pages/SingleArticle";
 import Unsubscribe from "./Pages/Unsubscribe";
+import AuthorPage from "./Pages/AuthorPage";
 import { getCategories } from "./helpers/category";
 import { getBlogs } from "./helpers/getters";
 import NoMatch from "./Pages/NoMatch";
@@ -33,6 +34,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/newsletter/unsubscribe/:token" element={<Unsubscribe />} />
+        <Route path="/author/:authorName" element={<AuthorPage />} />
 
         <Route path="/category/*">
           <Route path=":category" element={<Politics />}>

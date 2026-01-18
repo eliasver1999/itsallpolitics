@@ -13,6 +13,7 @@ import ModernNav from "../components/navbar/ModernNav";
 import SimpleNav from "../components/navbar/SimpleNav";
 import Contact from "../components/Contact/Contact";
 import Newsletter from "../components/Newsletter/Newsletter";
+import { ArticleCardSkeleton, CategoryCardSkeleton, HeroSliderSkeleton } from "../components/Loading/LoadingStates";
 import Slider from "react-slick";
 import { ApiKind } from "../types/api";
 import "slick-carousel/slick/slick.css";
@@ -72,56 +73,55 @@ const Home = (props: Props) => {
       <div></div>
       <section className="relative top-0 lg:-mt-24 mx-auto block ">
         <div className="lg:w-screen h-1/2 relative">
-        <Slider {...settings}>
-  {blogs.slice(0, 5).map((blog) => {
-    return (
-      <div
-        key={blog.id}
-        className="w-screen lg:h-screen h-[600px] flex justify-center items-center text-center"
-      >
-        <div className="relative w-full lg:h-screen h-[600px]">
-          {blog.image ? (
-            <div className="relative w-screen h-full aspect-w-16 aspect-h-9">
-              <img
-                src={ApiKind.IMAGE + blog.image.path}
-                className="w-full h-full object-cover brightness-50"
-              />
-            </div>
-          ) : null}
-          <div className="absolute 2xl:bottom-48 bottom-16 2xl:left-56 md:left-32 space-y-4 md:w-1/2 w-full">
-            <h4 className="cursor-pointer text-slate-50 2xl:text-3xl text-xl xl:border-b-2 md:text-start text-center py-2 border-[#9544cf]">
-              <NavLink
-                to={`/category/${blog.category.id}/article/${blog.id}`}
-                onClick={() => console.log(blog)}
-              >
-                {blog.title}
-              </NavLink>
-            </h4>
-            <div className="flex md:justify-start justify-center">
-              {blog.creator.map((creator,index) => {
-                return (
-                  <h5 key={index|| creator.name} className="text-slate-50 xl:text-base text-sm">
-                    {creator.name}-
-                  </h5>
-                );
-              })}
-               <h5 className="text-slate-50 xl:text-base text-sm">
-              {formatDate(new Date(blog.created_at))} |{" "}
-                    <NavLink
-                      to={`/category/${blog.category.id}`}
-                      onClick={() => console.log(blog)}
-                    >
-                      {blog.category.title}
-                    </NavLink>
-                </h5>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  })}
-</Slider>
-
+          {blogs.length > 0 ? (
+            <Slider {...settings}>
+              {blogs.slice(0, 5).map((blog) => (
+                <div
+                  key={blog.id}
+                  className="w-screen lg:h-screen h-[600px] flex justify-center items-center text-center"
+                >
+                  <div className="relative w-full lg:h-screen h-[600px]">
+                    {blog.image ? (
+                      <div className="relative w-screen h-full aspect-w-16 aspect-h-9">
+                        <img
+                          src={ApiKind.IMAGE + blog.image.path}
+                          className="w-full h-full object-cover brightness-50"
+                        />
+                      </div>
+                    ) : null}
+                    <div className="absolute 2xl:bottom-48 bottom-16 2xl:left-56 md:left-32 space-y-4 md:w-1/2 w-full">
+                      <h4 className="cursor-pointer text-slate-50 2xl:text-3xl text-xl xl:border-b-2 md:text-start text-center py-2 border-[#9544cf]">
+                        <NavLink
+                          to={`/category/${blog.category.id}/article/${blog.id}`}
+                          onClick={() => console.log(blog)}
+                        >
+                          {blog.title}
+                        </NavLink>
+                      </h4>
+                      <div className="flex md:justify-start justify-center">
+                        {blog.creator.map((creator, index) => (
+                          <h5 key={index || creator.name} className="text-slate-50 xl:text-base text-sm">
+                            {creator.name}-
+                          </h5>
+                        ))}
+                        <h5 className="text-slate-50 xl:text-base text-sm">
+                          {formatDate(new Date(blog.created_at))} |{" "}
+                          <NavLink
+                            to={`/category/${blog.category.id}`}
+                            onClick={() => console.log(blog)}
+                          >
+                            {blog.category.title}
+                          </NavLink>
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          ) : (
+            <HeroSliderSkeleton />
+          )}
         </div>
         {/* <motion.img
           src="./assets/test.jpg"
@@ -144,8 +144,8 @@ const Home = (props: Props) => {
       </section>
 
       <section className="grid lg:grid-cols-4 mt-16 mb-16">
-        {Array.isArray(category) && category.length > 0 && category.map((cat, i) => {
-          return (
+        {Array.isArray(category) && category.length > 0 ? (
+          category.map((cat, i) => (
             <div key={cat.id}>
               {cat.image ? (
                 <Categories
@@ -158,8 +158,13 @@ const Home = (props: Props) => {
                 ""
               )}
             </div>
-          );
-        })}
+          ))
+        ) : (
+          // Loading skeletons for categories
+          Array.from({ length: 4 }).map((_, i) => (
+            <CategoryCardSkeleton key={i} />
+          ))
+        )}
       </section>
       <section className="mb-32">
         <h3 className="text-3xl font-semibold md:px-64 md:text-start text-center">
@@ -168,20 +173,21 @@ const Home = (props: Props) => {
         <div
           className={`${
             blogs.length > 0 ? "grid lg:grid-cols-3 grid-cols-1" : ""
-          } justify-center items-center  gap-16 lg:px-12 px-0 mt-12`}
+          } justify-center items-center gap-16 lg:px-12 px-0 mt-12`}
         >
           {blogs.length > 0 ? (
-            blogs.slice(0, 6).map((blog: blogType) => {
-              return (
-                <div className="w-full">
-                  <ArticleSecond blog={blog} small={false} />
-                </div>
-              );
-            })
+            blogs.slice(0, 6).map((blog: blogType) => (
+              <div key={blog.id} className="w-full">
+                <ArticleSecond blog={blog} small={false} />
+              </div>
+            ))
           ) : (
-            <h3 className="text-xl font-semibold md:px-64 w-full">
-              Δεν βρέθηκαν άρθρα.
-            </h3>
+            // Loading skeletons for articles
+            <div className="grid lg:grid-cols-3 grid-cols-1 gap-16 lg:px-12 px-0">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <ArticleCardSkeleton key={i} />
+              ))}
+            </div>
           )}
         </div>
       </section>
