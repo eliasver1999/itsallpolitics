@@ -42,9 +42,9 @@ const PhoneNavbar = (props: Props) => {
             >
               <AiOutlineSearch size={20} className="text-gray-600" />
             </button>
-            <div className="py-4">
-              <img src="/assets/logo.png" alt="logo" width={132} height={128} />
-            </div>
+            <NavLink to="/" className="py-4" aria-label="Αρχική">
+              <img src="/assets/logo.png" alt="logo" width={132} height={128} className="cursor-pointer" />
+            </NavLink>
           </div>
           <button
             className="flex flex-col h-full space-y-1 cursor-pointer z-40 relative"
