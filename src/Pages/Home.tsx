@@ -98,7 +98,7 @@ const Home = (props: Props) => {
                           {blog.title}
                         </NavLink>
                       </h4>
-                      <div className="flex md:justify-start justify-center">
+                      <div className="flex md:justify-start justify-center gap-x-1">
                         {blog.creator.map((creator, index) => (
                           <h5 key={index || creator.name} className="text-slate-50 xl:text-base text-sm">
                             {creator.name} | {" "}

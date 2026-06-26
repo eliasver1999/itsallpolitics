@@ -77,8 +77,25 @@ const SingleArticle = (props: Props) => {
 
   return (
     <>
-      {/* ⭐ Open Graph + Twitter meta tags */}
-      
+      {/* Client-side meta tags (browser tab + JS-aware apps). Crawlers that
+          don't run JS read the server-rendered tags from /api/blog/share/{id}. */}
+      <Helmet>
+        <title>{metaTitle}</title>
+        <meta name="description" content={metaDescription} />
+        <link rel="canonical" href={articleUrl} />
+
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="itsallpolitics" />
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:image" content={metaImage} />
+        <meta property="og:url" content={articleUrl} />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={metaTitle} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content={metaImage} />
+      </Helmet>
 
       <div className="xl:hidden block">
         <PhoneNavbar />
@@ -93,7 +110,7 @@ const SingleArticle = (props: Props) => {
             {blog?.title}
           </h3>
 
-          {/* {blog && <ShareButtons blogId={blog.id} blogTitle={blog.title} />} */}
+          {blog && <ShareButtons blogId={blog.id} blogTitle={blog.title} />}
 
           <h4 className="text-lg tracking-wide font-thin">
             Κατηγορία:{" "}
