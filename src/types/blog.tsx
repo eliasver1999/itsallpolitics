@@ -2,6 +2,7 @@ export interface creator {
   name: string;
   email: string;
   id?: number;
+  image?: { path: string } | null;
 }
 interface category {
   id: string;

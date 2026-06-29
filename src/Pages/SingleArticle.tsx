@@ -109,8 +109,6 @@ const SingleArticle = (props: Props) => {
             {blog?.title}
           </h3>
 
-          {blog && <ShareButtons blogId={blog.id} blogTitle={blog.title} />}
-
           <h4 className="text-lg tracking-wide font-thin">
             Κατηγορία:{" "}
             <NavLink to={"/category/" + blog?.category.id}>
@@ -174,6 +172,8 @@ const SingleArticle = (props: Props) => {
               </NavLink>
             ))}
           </h4>
+
+          {blog && <ShareButtons blogId={blog.id} blogTitle={blog.title} />}
         </div>
 
         {/* ... rest of your component unchanged ... */}
