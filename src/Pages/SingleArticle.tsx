@@ -7,7 +7,6 @@ import { blogType, creator } from "../types/blog";
 import { state } from "../types/initial";
 import { useSelector } from "react-redux";
 import { ApiKind } from "../types/api";
-import DOMPurify from "dompurify";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -25,7 +24,7 @@ import "./article.css";
 // ⭐ import Helmet
 import { Helmet } from "react-helmet-async";
 import ShareButtons from "../components/ShareButtons";
-import { stripHtml } from "./util";
+import { stripHtml, sanitizeArticleHtml } from "./util";
 
 type Props = {};
 
@@ -139,9 +138,7 @@ const SingleArticle = (props: Props) => {
             {blog?.body ? (
               <div
                 dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(blog?.body, {
-                    USE_PROFILES: { html: true },
-                  }),
+                  __html: sanitizeArticleHtml(blog?.body),
                 }}
                 className="article-content"
               />
@@ -156,9 +153,7 @@ const SingleArticle = (props: Props) => {
             {blog?.body ? (
               <div
                 dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(blog?.body, {
-                    USE_PROFILES: { html: true },
-                  }),
+                  __html: sanitizeArticleHtml(blog?.body),
                 }}
                 className="article-content"
               />

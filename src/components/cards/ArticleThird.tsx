@@ -1,5 +1,5 @@
-import DOMPurify from "dompurify";
 import React from "react";
+import { sanitizeArticleHtml } from "../../Pages/util";
 import { useNavigate } from "react-router-dom";
 import { formatDate } from "../../helpers/date";
 import { ApiKind } from "../../types/api";
@@ -11,9 +11,7 @@ type Props = {
 
 const ArticleThird = ({ blog }: Props) => {
   const navigate = useNavigate();
-  const cleanHTML = DOMPurify.sanitize(blog.body, {
-    USE_PROFILES: { html: true },
-  });
+  const cleanHTML = sanitizeArticleHtml(blog.body);
   return (
     <div className="relative h-[700px] w-full">
       <img
@@ -45,13 +43,13 @@ const ArticleThird = ({ blog }: Props) => {
                       dangerouslySetInnerHTML={{
                         __html: cleanHTML?.substring(0, 290).concat("..."),
                       }}
-                      className="my-4 inline-block text-ellipsis"
+                      className="card-excerpt my-4 inline-block text-ellipsis"
                     ></p>
                   </div>
                 ) : (
                   <p
                     dangerouslySetInnerHTML={{ __html: cleanHTML }}
-                    className="my-4"
+                    className="card-excerpt my-4"
                   ></p>
                 )}
               </div>

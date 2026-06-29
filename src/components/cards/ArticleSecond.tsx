@@ -1,6 +1,5 @@
-import DOMPurify from "dompurify";
-import { ClientRequest } from "http";
 import React from "react";
+import { sanitizeArticleHtml } from "../../Pages/util";
 
 import { useNavigate, NavLink } from "react-router-dom";
 import { formatDate } from "../../helpers/date";
@@ -16,9 +15,7 @@ type Props = {
 
 const ArticleSecond = ({ blog, small }: Props) => {
   const navigate = useNavigate();
-  const cleanHTML = DOMPurify.sanitize(blog.body, {
-    USE_PROFILES: { html: true },
-  });
+  const cleanHTML = sanitizeArticleHtml(blog.body);
 
   return (
     <div
@@ -60,7 +57,7 @@ const ArticleSecond = ({ blog, small }: Props) => {
         {small ? (
           ""
         ) : (
-          <div className="bg-transparent">
+          <div className="card-excerpt bg-transparent">
             {cleanHTML?.length > 200 ? (
               <div>
                 <p

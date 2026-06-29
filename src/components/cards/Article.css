@@ -1,3 +1,9 @@
-span {
+/* Strip pasted/editor backgrounds ONLY inside card excerpts (not the full
+   article). This used to be a global `span` rule, which leaked app-wide and
+   wiped legitimate text highlights in the article body. */
+.card-excerpt span,
+.card-excerpt strong,
+.card-excerpt em,
+.card-excerpt p {
   background-color: transparent !important;
 }

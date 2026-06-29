@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { formatDate } from "../../helpers/date";
 import { ApiKind } from "../../types/api";
-import DOMPurify from "dompurify";
+import { sanitizeArticleHtml } from "../../Pages/util";
 type Props = {
   id: number;
   date: string;
@@ -14,9 +14,7 @@ type Props = {
 
 const Article = ({ image, date, category, title, description, id }: Props) => {
   const dateFormat = new Date(date);
-  const cleanHTML = DOMPurify.sanitize(description, {
-    USE_PROFILES: { html: true },
-  });
+  const cleanHTML = sanitizeArticleHtml(description);
   const navigate = useNavigate();
   return (
     <div className="flex flex-col  border-2 border-gray-200 p-2 rounded-md min-h-[611px] max-h-[611px]">
@@ -46,13 +44,13 @@ const Article = ({ image, date, category, title, description, id }: Props) => {
                   dangerouslySetInnerHTML={{
                     __html: cleanHTML?.substring(0, 210).concat("..."),
                   }}
-                  className="my-4 inline-block text-ellipsis"
+                  className="card-excerpt my-4 inline-block text-ellipsis"
                 ></p>
               </div>
             ) : (
               <p
                 dangerouslySetInnerHTML={{ __html: cleanHTML }}
-                className="my-4"
+                className="card-excerpt my-4"
               ></p>
             )}
             {cleanHTML?.length > 200 && (
