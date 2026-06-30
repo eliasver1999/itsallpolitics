@@ -98,7 +98,7 @@ const Footer = (props: Props) => {
                   className="inline-block"
                   href="https://www.facebook.com/profile.php?id=100091351862257"
                 >
-                  itsallpolitics.gr
+                  It's All Politics
                 </a>
               </li>
               <li>

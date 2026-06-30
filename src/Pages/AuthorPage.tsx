@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import { AiOutlineMail, AiOutlineFileText, AiOutlineAppstore, AiOutlineCalendar } from "react-icons/ai";
+import { AiOutlineFileText, AiOutlineAppstore, AiOutlineCalendar } from "react-icons/ai";
 import { state } from "../types/initial";
 import { blogType, creator } from "../types/blog";
 import { ApiKind } from "../types/api";
@@ -120,16 +120,6 @@ const AuthorPage = () => {
             <span className="mt-2 inline-flex items-center px-3 py-1 rounded-full bg-[#9544cf]/10 text-[#9544cf] text-sm font-medium">
               Συντάκτης
             </span>
-
-            {authorInfo?.email && (
-              <a
-                href={`mailto:${authorInfo.email}`}
-                className="mt-3 inline-flex items-center gap-2 text-sm text-gray-500 hover:text-[#9544cf] transition-colors"
-              >
-                <AiOutlineMail size={16} />
-                {authorInfo.email}
-              </a>
-            )}
           </motion.div>
 
           {/* Stats */}
