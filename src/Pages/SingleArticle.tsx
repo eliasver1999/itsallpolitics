@@ -19,7 +19,7 @@ import { getCategories } from "../helpers/category";
 import { getRelatedArticles } from "../helpers/relatedArticles";
 import { calculateReadingTime } from "../helpers/readingTime";
 import TagList from "../components/Tags/TagList";
-import { IoTimeOutline, IoEyeOutline } from "react-icons/io5";
+import { IoTimeOutline } from "react-icons/io5";
 
 import "./article.css";
 
@@ -37,7 +37,6 @@ const SingleArticle = (props: Props) => {
   let { id } = useParams();
   const { blogs, category } = useSelector((state: state) => state);
   const [blog, setBlog] = React.useState<blogType>();
-  const [views, setViews] = React.useState<number | undefined>();
   const viewedRef = React.useRef<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -51,14 +50,12 @@ const SingleArticle = (props: Props) => {
     setBlog(blogs.find((item: blogType) => item.id.toLocaleString() === id));
   }, [blogs, location.pathname]); // removed "blog" from deps
 
-  // Count a view once per article visit; seed the counter from the loaded data.
+  // Count a view once per article visit. Tracking stays on; the count is not
+  // shown in the UI for now (hidden per request — re-enable display later).
   useEffect(() => {
     if (blog && viewedRef.current !== String(blog.id)) {
       viewedRef.current = String(blog.id);
-      setViews(blog.views);
-      incrementView(blog.id).then((v) => {
-        if (v !== null) setViews(v);
-      });
+      incrementView(blog.id);
     }
   }, [blog]);
 
@@ -131,20 +128,13 @@ const SingleArticle = (props: Props) => {
             </NavLink>
           </h4>
 
-          {/* Reading time + views */}
+          {/* Reading time (view count hidden for now) */}
           {blog && (
             <div className="flex items-center gap-4 text-sm text-gray-500 mt-1">
               <span className="flex items-center gap-1">
                 <IoTimeOutline size={16} />
                 {calculateReadingTime(blog.body)}
               </span>
-              {views !== undefined && views !== null && (
-                <span className="flex items-center gap-1">
-                  <IoEyeOutline size={16} />
-                  {views.toLocaleString("el-GR")}{" "}
-                  {views === 1 ? "προβολή" : "προβολές"}
-                </span>
-              )}
             </div>
           )}
 
@@ -248,21 +238,15 @@ const SingleArticle = (props: Props) => {
                   {mostRead.map((item: blogType) => (
                     <li
                       key={item.id}
-                      className="border-b-2 cursor-pointer flex items-start justify-between gap-2"
+                      className="border-b-2 cursor-pointer"
                       onClick={() =>
                         navigate(
                           `/category/${item.category.id}/article/${item.id}`
                         )
                       }
                     >
-                      <span className="flex-1">
-                        <IoIosArrowForward className="inline-block" size={16} />
-                        <span>{item.title}</span>
-                      </span>
-                      <span className="flex items-center gap-1 text-xs text-gray-400 whitespace-nowrap mt-1">
-                        <IoEyeOutline size={13} />
-                        {(item.views ?? 0).toLocaleString("el-GR")}
-                      </span>
+                      <IoIosArrowForward className="inline-block" size={16} />
+                      <span>{item.title}</span>
                     </li>
                   ))}
                 </ul>
