@@ -25,6 +25,7 @@ export interface blogType {
   category: category;
   image: image;
   tags?: Array<tag>;
+  views?: number;
   created_at: string;
   update_at: string;
 }

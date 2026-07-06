@@ -14,10 +14,12 @@ import ArticleSecond from "../components/cards/ArticleSecond";
 import ModernNav from "../components/navbar/ModernNav";
 import SimpleNav from "../components/navbar/SimpleNav";
 import PhoneNavbar from "../components/navbar/PhoneNavbar";
-import { getBlogs } from "../helpers/getters";
+import { getBlogs, incrementView } from "../helpers/getters";
 import { getCategories } from "../helpers/category";
 import { getRelatedArticles } from "../helpers/relatedArticles";
+import { calculateReadingTime } from "../helpers/readingTime";
 import TagList from "../components/Tags/TagList";
+import { IoTimeOutline, IoEyeOutline } from "react-icons/io5";
 
 import "./article.css";
 
@@ -35,6 +37,8 @@ const SingleArticle = (props: Props) => {
   let { id } = useParams();
   const { blogs, category } = useSelector((state: state) => state);
   const [blog, setBlog] = React.useState<blogType>();
+  const [views, setViews] = React.useState<number | undefined>();
+  const viewedRef = React.useRef<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -47,7 +51,22 @@ const SingleArticle = (props: Props) => {
     setBlog(blogs.find((item: blogType) => item.id.toLocaleString() === id));
   }, [blogs, location.pathname]); // removed "blog" from deps
 
+  // Count a view once per article visit; seed the counter from the loaded data.
+  useEffect(() => {
+    if (blog && viewedRef.current !== String(blog.id)) {
+      viewedRef.current = String(blog.id);
+      setViews(blog.views);
+      incrementView(blog.id).then((v) => {
+        if (v !== null) setViews(v);
+      });
+    }
+  }, [blog]);
+
   const relatedArticles = blog ? getRelatedArticles(blog, blogs, 6) : [];
+  const mostRead = [...blogs]
+    .filter((b) => (b.views ?? 0) > 0)
+    .sort((a, b) => (b.views ?? 0) - (a.views ?? 0))
+    .slice(0, 5);
 
   // ⭐ Build canonical URL for share/meta
   const origin =
@@ -111,6 +130,23 @@ const SingleArticle = (props: Props) => {
               {blog?.category.title}
             </NavLink>
           </h4>
+
+          {/* Reading time + views */}
+          {blog && (
+            <div className="flex items-center gap-4 text-sm text-gray-500 mt-1">
+              <span className="flex items-center gap-1">
+                <IoTimeOutline size={16} />
+                {calculateReadingTime(blog.body)}
+              </span>
+              {views !== undefined && views !== null && (
+                <span className="flex items-center gap-1">
+                  <IoEyeOutline size={16} />
+                  {views.toLocaleString("el-GR")}{" "}
+                  {views === 1 ? "προβολή" : "προβολές"}
+                </span>
+              )}
+            </div>
+          )}
 
           {/* Tags */}
           {blog?.tags && blog.tags.length > 0 && (
@@ -203,6 +239,36 @@ const SingleArticle = (props: Props) => {
                 );
               })}
             </ul>
+            {mostRead.length > 0 && (
+              <div className="mt-6">
+                <span className="text-gray-800 font-semibold tracking-wider">
+                  Δημοφιλέστερα
+                </span>
+                <ul className="list-none space-y-4 text-[#333333] tracking-wide mt-4">
+                  {mostRead.map((item: blogType) => (
+                    <li
+                      key={item.id}
+                      className="border-b-2 cursor-pointer flex items-start justify-between gap-2"
+                      onClick={() =>
+                        navigate(
+                          `/category/${item.category.id}/article/${item.id}`
+                        )
+                      }
+                    >
+                      <span className="flex-1">
+                        <IoIosArrowForward className="inline-block" size={16} />
+                        <span>{item.title}</span>
+                      </span>
+                      <span className="flex items-center gap-1 text-xs text-gray-400 whitespace-nowrap mt-1">
+                        <IoEyeOutline size={13} />
+                        {(item.views ?? 0).toLocaleString("el-GR")}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             <div className="mt-4">
               <span className="text-gray-800 font-semibold tracking-wider">
                 ΚΑΤΗΓΟΡΙΕΣ
