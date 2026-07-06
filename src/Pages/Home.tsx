@@ -28,7 +28,6 @@ type Props = {};
 const Home = (props: Props) => {
   const { blogs, category } = useSelector((state: state) => state);
   const navigate = useNavigate();
-  console.log("category",category)
   const settings = {
     dots: true,
     infinite: true,
@@ -93,7 +92,6 @@ const Home = (props: Props) => {
                       <h4 className="cursor-pointer text-slate-50 2xl:text-3xl text-xl xl:border-b-2 md:text-start text-center py-2 border-[#9544cf]">
                         <NavLink
                           to={`/category/${blog.category.id}/article/${blog.id}`}
-                          onClick={() => console.log(blog)}
                         >
                           {blog.title}
                         </NavLink>
@@ -108,7 +106,6 @@ const Home = (props: Props) => {
                           {formatDate(new Date(blog.created_at))} |{" "}
                           <NavLink
                             to={`/category/${blog.category.id}`}
-                            onClick={() => console.log(blog)}
                           >
                             {blog.category.title}
                           </NavLink>

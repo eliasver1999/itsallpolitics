@@ -24,7 +24,6 @@ const PhoneNavbar = (props: Props) => {
   const setScroll = () => {
     setOffset(window.scrollY);
   };
-  console.log(offset);
   React.useEffect(() => {
     window.addEventListener("scroll", setScroll);
     return () => {

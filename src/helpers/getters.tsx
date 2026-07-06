@@ -46,7 +46,5 @@ export const getBlogs2 = function () {
       });
       return res.data;
     })
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch(() => {});
 };

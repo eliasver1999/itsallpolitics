@@ -39,16 +39,8 @@ const SingleArticle = (props: Props) => {
   const location = useLocation();
 
   React.useEffect(() => {
-    getBlogs()
-      .then()
-      .catch((error) => {
-        console.log(error);
-      });
-    getCategories()
-      .then()
-      .catch((error) => {
-        console.log(error);
-      });
+    getBlogs().catch(() => {});
+    getCategories().catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -61,7 +53,6 @@ const SingleArticle = (props: Props) => {
   const origin =
     typeof window !== "undefined" ? 'https://www.itsallpolitics.gr' : "https://www.itsallpolitics.gr";
   const articleUrl = `${origin}${location.pathname}`;
-  console.log(articleUrl)
   // ⭐ Prepare meta data safely
   const metaTitle = blog?.title
     ? `${blog.title} | itsallpolitics`

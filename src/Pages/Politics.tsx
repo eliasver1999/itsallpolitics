@@ -16,14 +16,12 @@ type Props = {};
 
 const Politics = (props: Props) => {
   const { category } = useParams();
-  console.log(category);
   const blogs: blogType[] = useSelector((state: state) => state.blogs);
   const categories = useSelector((state: state) => state.category);
   //and then
   const cat: any = categories.filter(
     (item) => item.id.toLocaleString() === category
   );
-  console.log(cat);
   const blog: any = blogs.filter(
     (item: blogType) => Number(item.category.id) === Number(category)
   );

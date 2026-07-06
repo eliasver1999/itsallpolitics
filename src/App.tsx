@@ -18,16 +18,8 @@ const TRACKING_ID = "G-0VHZX96P2T"; // YOUR_OWN_TRACKING_ID
 ReactGA.initialize(TRACKING_ID);
 function App() {
   React.useEffect(() => {
-    getBlogs()
-      .then()
-      .catch((error) => {
-        console.log(error);
-      });
-    getCategories()
-      .then()
-      .catch((error) => {
-        console.log(error);
-      });
+    getBlogs().catch(() => {});
+    getCategories().catch(() => {});
   }, []);
   return (
     <>

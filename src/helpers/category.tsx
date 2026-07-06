@@ -18,7 +18,6 @@ export const getCategories = function () {
           });
           resolve("Categories loaded successfully");
         } else {
-          console.error("Invalid category data format:", res.data);
           store.dispatch({
             type: CategoryActionKind.GETALLCATEGORIES,
             payload: [],
@@ -27,7 +26,6 @@ export const getCategories = function () {
         }
       })
       .catch((error: any) => {
-        console.error("Failed to fetch categories:", error);
         store.dispatch({
           type: CategoryActionKind.GETALLCATEGORIES,
           payload: [],
