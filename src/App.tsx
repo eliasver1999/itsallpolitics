@@ -8,6 +8,7 @@ import SingleArticle from "./Pages/SingleArticle";
 import Unsubscribe from "./Pages/Unsubscribe";
 import AuthorPage from "./Pages/AuthorPage";
 import Archive from "./Pages/Archive";
+import TagPage from "./Pages/TagPage";
 import { getCategories } from "./helpers/category";
 import { getBlogs } from "./helpers/getters";
 import NoMatch from "./Pages/NoMatch";
@@ -29,6 +30,7 @@ function App() {
         <Route path="/newsletter/unsubscribe/:token" element={<Unsubscribe />} />
         <Route path="/author/:authorName" element={<AuthorPage />} />
         <Route path="/articles" element={<Archive />} />
+        <Route path="/tag/:slug" element={<TagPage />} />
 
         <Route path="/category/*">
           <Route path=":category" element={<Politics />}>
@@ -39,6 +41,7 @@ function App() {
           path="/category/:categoryId/article/:id"
           element={<SingleArticle />}
         />
+        <Route path="*" element={<NoMatch />} />
       </Routes>
       <CookieBanner />
     </>
