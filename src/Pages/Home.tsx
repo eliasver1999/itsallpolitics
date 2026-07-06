@@ -190,6 +190,16 @@ const Home = (props: Props) => {
             </div>
           )}
         </div>
+        {blogs.length > 0 && (
+          <div className="flex justify-center mt-12">
+            <NavLink
+              to="/articles"
+              className="inline-block px-8 py-3 rounded-full border-2 border-[#9544cf] text-[#9544cf] font-semibold hover:bg-[#9544cf] hover:text-white transition-all duration-300"
+            >
+              Δείτε όλα τα άρθρα
+            </NavLink>
+          </div>
+        )}
       </section>
       <section className="mb-12">
         <Newsletter />

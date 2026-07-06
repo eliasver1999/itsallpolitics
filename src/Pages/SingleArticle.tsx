@@ -25,6 +25,9 @@ import "./article.css";
 import { Helmet } from "react-helmet-async";
 import ShareButtons from "../components/ShareButtons";
 import { stripHtml, sanitizeArticleHtml } from "./util";
+import ReadingProgress from "../components/ReadingProgress/ReadingProgress";
+import AuthorBio from "../components/AuthorBio/AuthorBio";
+import Newsletter from "../components/Newsletter/Newsletter";
 
 type Props = {};
 
@@ -95,6 +98,8 @@ const SingleArticle = (props: Props) => {
         <meta name="twitter:description" content={metaDescription} />
         <meta name="twitter:image" content={metaImage} />
       </Helmet>
+
+      <ReadingProgress />
 
       <div className="xl:hidden block">
         <PhoneNavbar />
@@ -174,6 +179,12 @@ const SingleArticle = (props: Props) => {
           </h4>
 
           {blog && <ShareButtons blogId={blog.id} blogTitle={blog.title} />}
+
+          {blog && <AuthorBio creators={blog.creator} blogs={blogs} />}
+
+          <div className="mt-10 rounded-xl overflow-hidden">
+            <Newsletter />
+          </div>
         </div>
 
         {/* ... rest of your component unchanged ... */}
